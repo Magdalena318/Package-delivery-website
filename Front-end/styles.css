@@ -19,14 +19,14 @@ input[type=button], input[type=submit]{
 	grid-column-end: 3;
 	align-self: center;
 	font-weight : bold ;
-	border: 2px solid black;/
+	border: 2px solid black;
 }
 
 
 .subheader{	
 	grid-column-start: 1;
 	grid-column-end: 3;
-		background-color: #E1F8DC;
+	background-color: #E1F8DC;
 	text-align: center;
 	border: 2px solid;
 }
@@ -65,14 +65,18 @@ input[type=button], input[type=submit]{
 	grid-column:2;
 }
 
-#seller_details{
-	visibility:hidden;
+#pickup_refresh, #delivery_refresh{
+	grid-column:2;
 }
 
-#buyer_details{
-	visibility:hidden;
+#send_button{
+	grid-column: 1;
 }
 
-#package_details{
+#lookup_button_open_form{
+	grid-column: 2;
+}
+
+#package_number_form, #sender_details, #receiver_details, #package_details, #display_package_form{
 	visibility:hidden;
 }
