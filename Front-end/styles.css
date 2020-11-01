@@ -1,0 +1,78 @@
+body
+{
+	padding-left: 30%;
+	padding-right: 30%;
+	background-color: #FEF8DD;
+}
+
+form{
+	margin: 0 auto;
+	width: 600px;
+	display: grid;
+	grid-template-columns: auto auto;
+}
+
+input[type=button], input[type=submit]{
+	background-color:#E1F8DC;
+    height: 2em;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	align-self: center;
+	font-weight : bold ;
+	border: 2px solid black;/
+}
+
+
+.subheader{	
+	grid-column-start: 1;
+	grid-column-end: 3;
+		background-color: #E1F8DC;
+	text-align: center;
+	border: 2px solid;
+}
+
+.header{	
+	grid-column-start: 1;
+	grid-column-end: 3;
+	background-color: #E1F8DC;
+	text-align: center;
+	border: 2px solid;
+}
+
+.label{
+	grid-column:1;
+	text-align: left;
+	height: 1.5em;
+	font-weight : bold ;
+}
+
+.input{
+	grid-column:2;
+	height:18px;
+	font-weight : bold ;
+}
+
+.map{
+	grid-column:2;
+	height: 180px;
+}
+
+.delivered{
+	grid-column:1;
+}
+
+.tobedelivered{
+	grid-column:2;
+}
+
+#seller_details{
+	visibility:hidden;
+}
+
+#buyer_details{
+	visibility:hidden;
+}
+
+#package_details{
+	visibility:hidden;
+}
