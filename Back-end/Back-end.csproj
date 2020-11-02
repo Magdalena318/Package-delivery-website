@@ -173,6 +173,7 @@
     <Compile Include="JSON\PackageJSON.cs" />
     <Compile Include="JSON\Package_InfoJSON.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Database.cs" />
     <Compile Include="Models\Endpoint_details.cs" />
     <Compile Include="Models\Name.cs" />
     <Compile Include="Models\Package.cs" />
@@ -188,6 +189,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\Logs\Log.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />

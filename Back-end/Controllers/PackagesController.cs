@@ -10,11 +10,11 @@ using Back_end.Models;
 
 namespace Back_end.Controllers
 {
+
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PackagesController : ApiController
     {
-        List<Package> packages = new List<Package>();
-        private int last_package_id = 10000000;
+        Database data = new Database();
 
         // GET: api/Packages
         public IEnumerable<string> Get()
@@ -25,7 +25,7 @@ namespace Back_end.Controllers
         // GET: api/Packages/5
         public IHttpActionResult Get(int id)
         {
-            Package requested = packages.Find(p => p.id == id);
+            Package requested = data.FindPackage(id);
             if (requested == null) {
                 return NotFound();
             }
@@ -35,7 +35,7 @@ namespace Back_end.Controllers
         // POST: api/Packages
         public IHttpActionResult Post([FromBody] PackageJSON json_package)
         {
-            last_package_id++;
+            int id = data.NextId();
             Console.WriteLine(json_package);
 
             //Parsing pickup details
@@ -64,11 +64,11 @@ namespace Back_end.Controllers
             Package_Info package_info = new Package_Info(json_package.package_info.size, Convert.ToDouble(json_package.package_info.weight));
 
             //Creating and adding a new package
-            Package new_package = new Package(last_package_id, pickup_details, delivery_details, package_info);
-            packages.Add(new_package);
+            Package new_package = new Package(id, pickup_details, delivery_details, package_info);
+            data.AddNewPackage(new_package);
+            data.LogPackages();
 
-            Console.WriteLine(packages);
-            return Ok(packages);
+            return Ok(id);
         }
 
         // PUT: api/Packages/5
