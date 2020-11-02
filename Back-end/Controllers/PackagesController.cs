@@ -4,12 +4,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Back_end.Models;
 
 namespace Back_end.Controllers
 {
     public class PackagesController : ApiController
     {
-        
+        private Package[] packages { get; set; }
+        private int last_package_id = 10000000;
+
         // GET: api/Packages
         public IEnumerable<string> Get()
         {
@@ -17,14 +20,23 @@ namespace Back_end.Controllers
         }
 
         // GET: api/Packages/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            Package requested = Array.Find(packages, p => p.id == id);
+            if (requested == null) {
+                return NotFound();
+            }
+            return Ok(requested);
         }
 
         // POST: api/Packages
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]Package new_package)
         {
+            last_package_id += 1;
+
+            packages.Append(new_package);
+            Console.WriteLine(new_package);
+            return Ok(last_package_id);
         }
 
         // PUT: api/Packages/5

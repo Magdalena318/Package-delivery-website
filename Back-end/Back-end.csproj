@@ -162,6 +162,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Endpoint_details.cs" />
+    <Compile Include="Models\Name.cs" />
     <Compile Include="Models\Package.cs" />
     <Compile Include="Models\Package_Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

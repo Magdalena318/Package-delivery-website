@@ -1,5 +1,6 @@
 window.onload = function load(){
 	
+	
 	window.scrollTo(0, 0);
 	
 	//Looking up a package
@@ -15,9 +16,9 @@ window.onload = function load(){
 			 return;
 		 } else {			
 			// const userAction = async () => {
-				// const response = await fetch('http://example.com/movies.json');
+				// const response = await fetch('https://localhost:44361/Packages' );
 				// const myJson = await response.json(); //extract JSON from the http response
-				// // do something with myJson
+				// console.log(myJson);
 			// }
 			
 			document.getElementById("package_number_form").remove();
@@ -86,6 +87,7 @@ window.onload = function load(){
 		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
 	}).addTo(pickup_map);
 	var pickup_marker = L.layerGroup().addTo(pickup_map);
+	var pickup_location;
 	
 	
 	//Geocoding pickup
@@ -143,6 +145,7 @@ window.onload = function load(){
 			pickup_map.setView(latlng, 13)
 			pickup_marker.clearLayers();
 			var marker = L.marker(latlng).addTo(pickup_marker);
+			pickup_location = latlng;
 		});
 
 	}
@@ -155,6 +158,7 @@ window.onload = function load(){
 		pickup_marker.clearLayers();
 		
 		var marker = L.marker(e.latlng).addTo(pickup_marker);
+		pickup_location = e.latlng;
 		
 		geocodeService.reverse().latlng(e.latlng).run(function (error, result) {
 			if (error) {
@@ -199,7 +203,8 @@ window.onload = function load(){
 		zoomOffset: -1,
 		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
 	}).addTo(delivery_map);
-	var delivery_marker = L.layerGroup().addTo(pickup_map);
+	var delivery_marker = L.layerGroup().addTo(delivery_map);
+	var delivery_location;
 	
 	//Geocoding delivery
 	
@@ -256,6 +261,7 @@ window.onload = function load(){
 			delivery_map.setView(latlng, 13)
 			delivery_marker.clearLayers();
 			var marker = L.marker(latlng).addTo(delivery_marker);
+			delivery_location = latlng;
 		});
 	}
 
@@ -265,6 +271,7 @@ window.onload = function load(){
 		delivery_marker.clearLayers();
 		
 		var marker = L.marker(e.latlng).addTo(delivery_marker);
+		delivery_location = e.latlng;
 		
 		geocodeService.reverse().latlng(e.latlng).run(function (error, result) {
 			if (error) {
@@ -301,17 +308,59 @@ window.onload = function load(){
 	
 	//Send the package data to the server
 	document.getElementById("submit_package").onclick = function Send_package_data(){
-		// const userAction = async () => {
-		// const response = await fetch('http://example.com/movies.json', {
-			// method: 'POST',
-			// body: myBody, // string or object
-			// headers: {
-			  // 'Content-Type': 'application/json'
-			// }
-		// });
-		// const myJson = await response.json(); //extract JSON from the http response
-			// // do something with myJson
-		// }
+		//Constructing JSON
+		console.log("somesing");
+		const data = { "pickup_details": {
+			"name":{
+				"first_name": document.getElementById("pickup_fname").value,
+				"last_name": document.getElementById("pickup_lname").value
+			}, 
+			"address":{
+				"country": document.getElementById("pickup_country").value,
+				"city": document.getElementById("pickup_city").value,
+				"address": document.getElementById("pickup_address").value,
+				"index": document.getElementById("pickup_index").value,
+				"latlng":{
+					"lat": pickup_location.lat,
+					"lng": pickup_location.lng
+				}
+			}			 
+		}, "delivery_details":{
+			"name":{
+				"first_name": document.getElementById("delivery_fname").value,
+				"last_name": document.getElementById("delivery_lname").value
+			}, 
+			"address":{
+				"country": document.getElementById("delivery_country").value,
+				"city": document.getElementById("delivery_city").value,
+				"address": document.getElementById("delivery_address").value,
+				"index": document.getElementById("delivery_index").value,
+				"latlng":{
+					"lat": delivery_location.lat,
+					"lng": delivery_location.lng
+				}
+			}			 
+		}, "package_info":{
+			"size": document.getElementById("size").value,
+			"weight": document.getElementById("weight").value
+		}};
+		
+		console.log(JSON.stringify(data));
+		
+		fetch('https://localhost:44361/api/Packages', {
+			method: 'POST',
+			headers: {
+			'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+		.then(response => response.json())
+		.then(data => {
+		  console.log('Success:', data);
+		})
+		.catch((error) => {
+		  console.error('Error:', error);
+		});
 	}
 } 
 
