@@ -13,9 +13,14 @@ window.onload = function load(){
 		 if(package_number == null || package_number == ""){
 			 window.alert("Please enter the package number!");
 			 return;
-		 } else {
+		 } else {			
+			// const userAction = async () => {
+				// const response = await fetch('http://example.com/movies.json');
+				// const myJson = await response.json(); //extract JSON from the http response
+				// // do something with myJson
+			// }
+			
 			document.getElementById("package_number_form").remove();
-			//send request to the server and display info 
 			document.getElementById("display_package_form").style.visibility = "visible";
 		 }
 	}
@@ -292,8 +297,22 @@ window.onload = function load(){
 			console.log(address);
 		});
 	}
-
 	delivery_map.on('click', onDeliveryMapClick);
+	
+	//Send the package data to the server
+	document.getElementById("submit_package").onclick = function Send_package_data(){
+		// const userAction = async () => {
+		// const response = await fetch('http://example.com/movies.json', {
+			// method: 'POST',
+			// body: myBody, // string or object
+			// headers: {
+			  // 'Content-Type': 'application/json'
+			// }
+		// });
+		// const myJson = await response.json(); //extract JSON from the http response
+			// // do something with myJson
+		// }
+	}
 } 
 
 

@@ -1,63 +1,34 @@
 ﻿using System;
-
-class LatLng
+namespace Back_end.Models
 {
-	double lat;
-	double lng;
-
-	LatLng(double _lat, double _lng) {
-		this.lat = _lat;
-		this.lng = _lng;
-	}
-
-	double getLat() {
-		return lat;
-	}
-
-	double getLng()
+	class LatLng
 	{
-		return lng;
+		double lat { get; set; }
+		double lng { get; set; }
+
+		public LatLng(double _lat, double _lng)
+		{
+			this.lat = _lat;
+			this.lng = _lng;
+		}
+
 	}
-}
 
-public class Address
-{
-	string country;
-	string city;
-	string address;
-	string index;
-	LatLng latlng;
-
-	public Address(string _country, string _city, string _address, string _index, double lat, double lng)
+	public class Address
 	{
-		country = _country;
-		city = _city;
-		address = _address;
-		index = _index;
-		latlng = new LatLng(lat, lng);
-	}
+		string country { get; set; }
+		string city { get; set; }
+		string address { get; set; }
+		string index { get; set; }
+		LatLng latlng { get; set; }
 
-	string getCountry() {
-		return country;
-	}
-
-	string getCity()
-	{
-		return city;
-	}
-
-	string getAddress()
-	{
-		return address;
-	}
-
-	string getIndex()
-	{
-		return index;
-	}
-
-	LatLng getLatLng()
-	{
-		return latlng;
+		public Address(string _country, string _city, string _address, string _index, double lat, double lng)
+		{
+			country = _country;
+			city = _city;
+			address = _address;
+			index = _index;
+			latlng = new LatLng(lat, lng);
+		}
 	}
 }
