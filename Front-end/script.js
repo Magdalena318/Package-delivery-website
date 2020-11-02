@@ -306,6 +306,9 @@ window.onload = function load(){
 	}
 	delivery_map.on('click', onDeliveryMapClick);
 	
+			
+			
+			
 	//Send the package data to the server
 	document.getElementById("submit_package").onclick = function Send_package_data(){
 		//Constructing JSON
@@ -354,9 +357,9 @@ window.onload = function load(){
 			},
 			body: JSON.stringify(data),
 		})
-		.then(response => response.json())
-		.then(data => {
-		  console.log('Success:', data);
+			.then(response => response.json())
+			.then(data => {
+			  console.log('Success:', data);
 		})
 		.catch((error) => {
 		  console.error('Error:', error);

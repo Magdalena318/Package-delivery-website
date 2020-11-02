@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Back_end.JSON
 {
-    class LatLngJSON {
+    public class LatLngJSON {
         [JsonProperty("lat")]
         public string lat { get; set; }
         [JsonProperty("lng")]
@@ -23,7 +23,7 @@ namespace Back_end.JSON
         public string address { get; set; }
         [JsonProperty("index")]
         public string index { get; set; }
-        LatLngJSON latlng { get; set; }
+        public LatLngJSON latlng { get; set; }
         
     }
 }

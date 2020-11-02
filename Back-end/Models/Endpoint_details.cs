@@ -10,5 +10,10 @@ namespace Back_end.Models
         Name name { get; set; }
         Address address { get; set; }
         //DateTime date { get; set; }
+
+        public Endpoint_details(Name _name, Address _address) {
+            name = _name;
+            address = _address;
+        }
     }
 }

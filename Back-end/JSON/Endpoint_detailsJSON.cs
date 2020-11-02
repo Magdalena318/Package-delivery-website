@@ -7,7 +7,7 @@ namespace Back_end.JSON
 {
     public class Endpoint_detailsJSON
     {
-        NameJSON name { get; set; }
-        AddressJSON address { get; set; }
+        public NameJSON name { get; set; }
+        public AddressJSON address { get; set; }
     }
 }
