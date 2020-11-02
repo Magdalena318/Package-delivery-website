@@ -83,3 +83,6 @@ C:\Users\Cranberry\source\repos\homework\Back-end\obj\Debug\Back-end.csproj.Core
 C:\Users\Cranberry\source\repos\homework\Back-end\obj\Debug\Back-end.csproj.CopyComplete
 C:\Users\Cranberry\source\repos\homework\Back-end\obj\Debug\Back-end.dll
 C:\Users\Cranberry\source\repos\homework\Back-end\obj\Debug\Back-end.pdb
+C:\Users\Cranberry\source\repos\homework\Back-end\bin\System.Web.Cors.dll
+C:\Users\Cranberry\source\repos\homework\Back-end\bin\System.Web.Http.Cors.dll
+C:\Users\Cranberry\source\repos\homework\Back-end\bin\System.Web.Http.Cors.xml

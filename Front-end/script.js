@@ -310,7 +310,7 @@ window.onload = function load(){
 	document.getElementById("submit_package").onclick = function Send_package_data(){
 		//Constructing JSON
 		console.log("somesing");
-		const data = { "pickup_details": {
+		const data = { "id":"0", "pickup_details": {
 			"name":{
 				"first_name": document.getElementById("pickup_fname").value,
 				"last_name": document.getElementById("pickup_lname").value
