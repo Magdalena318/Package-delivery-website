@@ -14,6 +14,22 @@ namespace Back_end.Models
         public Database() {
             packages = new List<Package>();
             last_package_id = 10000000;
+
+            Name pickup_name = new Name("John", "Doe");
+            Address pickup_address = new Address("USA", "New York", "Washington st. 52", "51464", 52.6234, 54.45124);
+            Endpoint_details pickup_details = new Endpoint_details(pickup_name, pickup_address);
+
+            //Parsing delivery details
+            Name delivery_name = new Name("Lisa", "Kekington");
+            Address delivery_address = new Address("France", "Paris", "Rouge st. 21", "21152", 12.65453, 54.13545);
+            Endpoint_details delivery_details = new Endpoint_details(delivery_name, delivery_address);
+
+            //Parsing package_details
+            Package_Info package_info = new Package_Info("big enough", 52.3);
+
+            //Creating and adding a new package
+            Package new_package = new Package(last_package_id, pickup_details, delivery_details, package_info);
+            this.AddNewPackage(new_package);
         }
 
         public Package FindPackage(int id) {

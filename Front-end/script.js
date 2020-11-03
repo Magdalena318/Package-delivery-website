@@ -15,11 +15,11 @@ window.onload = function load(){
 			 window.alert("Please enter the package number!");
 			 return;
 		 } else {			
-			// const userAction = async () => {
-				// const response = await fetch('https://localhost:44361/Packages' );
-				// const myJson = await response.json(); //extract JSON from the http response
-				// console.log(myJson);
-			// }
+			const userAction = async () => {
+				const response = await fetch('https://localhost:44361/Packages/' + package_number.toString());
+				const myJson = await response.json(); //extract JSON from the http response
+				console.log(myJson);
+			}
 			
 			document.getElementById("package_number_form").remove();
 			document.getElementById("display_package_form").style.visibility = "visible";
