@@ -15,5 +15,13 @@ namespace Back_end.Models
             name = _name;
             address = _address;
         }
+
+        public Name getName() {
+            return name;
+        }
+        public Address getAddress()
+        {
+            return address;
+        }
     }
 }

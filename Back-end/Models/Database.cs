@@ -25,7 +25,7 @@ namespace Back_end.Models
             Endpoint_details delivery_details = new Endpoint_details(delivery_name, delivery_address);
 
             //Parsing package_details
-            Package_Info package_info = new Package_Info("big enough", 52.3);
+            Package_info package_info = new Package_info("big enough", 52.3);
 
             //Creating and adding a new package
             Package new_package = new Package(last_package_id, pickup_details, delivery_details, package_info);

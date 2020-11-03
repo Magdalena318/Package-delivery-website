@@ -15,5 +15,14 @@ namespace Back_end.Models
             first_name = _first_name;
             last_name = _last_name;
         }
+
+        public string getFirstName() {
+            return first_name;
+        }
+
+        public string getLastName()
+        {
+            return last_name;
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Back_end.Models
 {
-	class LatLng
+	public class LatLng
 	{
 		double lat { get; set; }
 		double lng { get; set; }
@@ -12,6 +12,14 @@ namespace Back_end.Models
 			this.lng = _lng;
 		}
 
+		public double getLat() {
+			return lat;
+		}
+
+		public double getLng()
+		{
+			return lng;
+		}
 	}
 
 	public class Address
@@ -29,6 +37,30 @@ namespace Back_end.Models
 			address = _address;
 			index = _index;
 			latlng = new LatLng(lat, lng);
+		}
+
+		public string getCountry() {
+			return country;
+		}
+
+		public string getCity()
+		{
+			return city;
+		}
+
+		public string getAddress()
+		{
+			return address;
+		}
+
+		public string getIndex()
+		{
+			return index;
+		}
+
+		public LatLng getLatLng()
+		{
+			return latlng;
 		}
 	}
 }

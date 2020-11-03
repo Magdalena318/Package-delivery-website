@@ -30,7 +30,9 @@ namespace Back_end.Controllers
             if (requested == null) {
                 return NotFound();
             }
-            return Ok("test");
+
+            PackageJSON response = new PackageJSON(requested);
+            return Ok(response);
         }
 
         // POST: api/Packages
@@ -62,7 +64,7 @@ namespace Back_end.Controllers
             Endpoint_details delivery_details = new Endpoint_details(delivery_name, delivery_address);
 
             //Parsing package_details
-            Package_Info package_info = new Package_Info(json_package.package_info.size, Convert.ToDouble(json_package.package_info.weight));
+            Package_info package_info = new Package_info(json_package.package_info.size, Convert.ToDouble(json_package.package_info.weight));
 
             //Creating and adding a new package
             Package new_package = new Package(id, pickup_details, delivery_details, package_info);

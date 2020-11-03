@@ -171,13 +171,13 @@
     <Compile Include="JSON\Endpoint_detailsJSON.cs" />
     <Compile Include="JSON\NameJSON.cs" />
     <Compile Include="JSON\PackageJSON.cs" />
-    <Compile Include="JSON\Package_InfoJSON.cs" />
+    <Compile Include="JSON\Package_infoJSON.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Database.cs" />
     <Compile Include="Models\Endpoint_details.cs" />
     <Compile Include="Models\Name.cs" />
     <Compile Include="Models\Package.cs" />
-    <Compile Include="Models\Package_Info.cs" />
+    <Compile Include="Models\Package_info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
