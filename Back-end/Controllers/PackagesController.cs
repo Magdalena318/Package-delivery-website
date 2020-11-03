@@ -30,7 +30,7 @@ namespace Back_end.Controllers
             if (requested == null) {
                 return NotFound();
             }
-            return Ok(requested);
+            return Ok("test");
         }
 
         // POST: api/Packages

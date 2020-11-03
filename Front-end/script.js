@@ -10,16 +10,24 @@ window.onload = function load(){
 	}
 	
 	document.getElementById("lookup_button").onclick = function Lookup_package(){
-		 var package_number = document.getElementById("package_number");
+		 var package_number = document.getElementById("package_number").value;
 		 if(package_number == null || package_number == ""){
 			 window.alert("Please enter the package number!");
 			 return;
-		 } else {			
-			const userAction = async () => {
-				const response = await fetch('https://localhost:44361/Packages/' + package_number.toString());
-				const myJson = await response.json(); //extract JSON from the http response
-				console.log(myJson);
-			}
+		 } else {	
+
+			//Sending GET request
+			var address = 'https://localhost:44361/api/Packages/'  + package_number.toString();
+			fetch(address, {
+				method: 'GET',
+			})
+				.then(response => response.json())
+				.then(data => {
+				  console.log('Success:', data);
+			})
+			.catch((error) => {
+			  console.error('Error:', error);
+			});
 			
 			document.getElementById("package_number_form").remove();
 			document.getElementById("display_package_form").style.visibility = "visible";
