@@ -14,7 +14,7 @@ namespace Back_end.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PackagesController : ApiController
     {
-        Database data = new Database();
+        private static Database data = new Database();
 
         // GET: api/Packages
         public IEnumerable<string> Get()
