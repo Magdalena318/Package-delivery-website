@@ -30,9 +30,8 @@ namespace Back_endNew.Controllers
                 return NotFound();
             }
 
-            return Ok();
-            //PackageJSON response = new PackageJSON(requested);
-            //return Ok(response);
+            PackageJSON response = requested.ToJSON();
+            return Ok(response);
         }
 
         // POST: api/Packages
