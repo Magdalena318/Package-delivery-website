@@ -22,11 +22,15 @@ input[type=button], input[type=submit]{
 	border: 2px solid black;
 }
 
+p{
+	font-weight: bold ;	
+}
+
 .hidden_input{
 	display:none;
 	grid-column:2;
 	height:18px;
-	font-weight : bold ;
+	font-weight: bold ;
 }
 
 .subheader{	
@@ -83,7 +87,7 @@ input[type=button], input[type=submit]{
 	grid-column: 2;
 }
 
-#package_number_form, #sender_details, #receiver_details, #package_details, #display_package_form{
+#package_number_form, #sender_details, #receiver_details, #package_details, #display_package_form, #package_submitted{
 	display: none;
 }
 

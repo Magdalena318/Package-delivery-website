@@ -79,6 +79,7 @@ window.onload = function load(){
 					var marker = L.marker(change_latlng).addTo(change_delivery_marker);
 					
 					//Displaying package info
+					document.getElementById("display_package_id").innerText = data.id;
 					document.getElementById("div_size").innerText = data.package_info.size;
 					document.getElementById("div_weight").innerText = data.package_info.weight;
 					
@@ -142,14 +143,18 @@ window.onload = function load(){
 		}
 	}
 	
-	document.getElementById("lookup_homepage").onclick = function ReturnHome(){
+	//Returning to the homepage
+	function ReturnHome(){
 		document.getElementById("package_number_form").style.display = "none";
 		document.getElementById("sender_details").style.display = "none";
 		document.getElementById("receiver_details").style.display = "none";
 		document.getElementById("package_details").style.display = "none";
 		document.getElementById("display_package_form").style.display = "none";
+		document.getElementById("package_submitted").style.display = "none";
 		document.getElementById("type_form").style.display = "grid";
 	}
+	document.getElementById("lookup_homepage").addEventListener("click", ReturnHome);
+	document.getElementById("submitted_homepage").addEventListener("click", ReturnHome);
 
 	//Map for Pickup
 	var pickup_map = L.map('pickup_location').setView([52.2297, 21.0122], 13);
@@ -439,14 +444,18 @@ window.onload = function load(){
 		})
 			.then(response => response.json())
 			.then(data => {
-			  console.log('Success:', data);
+				console.log('Success:', data.toString());
+				document.getElementById("sender_details").style.display = "none";
+				document.getElementById("receiver_details").style.display = "none";
+				document.getElementById("package_details").style.display = "none";
+				document.getElementById("package_submitted").style.display = "grid";
+				document.getElementById("success").textContent = document.getElementById("success").textContent + data;
 		})
 		.catch((error) => {
 		  console.error('Error:', error);
 		});
 	}
 } 
-
 
 
 
