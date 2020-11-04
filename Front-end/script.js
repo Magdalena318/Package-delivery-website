@@ -4,14 +4,12 @@ window.onload = function load(){
 	
 	//Looking up a package
 	document.getElementById("lookup_button_open_form").onclick = function Open_package_number(){
-		//document.getElementById("type_form").style.display = "none";
 		document.getElementById("type_form").style.display = "none";
 		document.getElementById("package_number_form").style.display = "grid";
 	}
 	
 	document.getElementById("lookup_button").onclick = function Lookup_package(){
 		 var package_number = document.getElementById("package_number").value;
-		 //var display_package_form = document.getElementById("display_package_form");
 		 if(package_number == null || package_number == ""){
 			 window.alert("Please enter the package number!");
 			 return;

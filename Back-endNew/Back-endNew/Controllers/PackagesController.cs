@@ -27,6 +27,7 @@ namespace Back_endNew.Controllers
             Package requested = data.FindPackage(id);
             if (requested == null)
             {
+
                 return NotFound();
             }
 
@@ -44,6 +45,7 @@ namespace Back_endNew.Controllers
 
             int new_id = data.NextId();
             Package new_package = new Package(new_id, json_package);
+            data.AddNewPackage(new_package);
             return Ok(new_id);
         }
 
