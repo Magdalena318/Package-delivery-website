@@ -42,8 +42,9 @@ namespace Back_endNew.Controllers
                 return NotFound();
             }
 
-            //Package response = new Package(json_package);
-            return Ok(json_package);
+            int new_id = data.NextId();
+            Package new_package = new Package(new_id, json_package);
+            return Ok(new_id);
         }
 
         // PUT: api/Packages/5
