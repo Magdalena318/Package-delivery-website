@@ -385,44 +385,48 @@ window.onload = function load(){
 			
 	//Send the package data to the server
 	document.getElementById("submit_package").onclick = function Send_package_data(){
-		//Constructing JSON
-		console.log("somesing");
-		const data = { "id":"1", "pickup_details": {
-			"name":{
-				"first_name": document.getElementById("pickup_fname").value,
-				"last_name": document.getElementById("pickup_lname").value
-			}, 
-			"address":{
-				"country": document.getElementById("pickup_country").value,
-				"city": document.getElementById("pickup_city").value,
-				"address": document.getElementById("pickup_address").value,
-				"index": document.getElementById("pickup_index").value,
-				"latlng":{
-					"lat": pickup_location.lat,
-					"lng": pickup_location.lng
-				}
-			},		
-			"date": document.getElementById("pickup_date").value
-		}, "delivery_details":{
-			"name":{
-				"first_name": document.getElementById("delivery_fname").value,
-				"last_name": document.getElementById("delivery_lname").value
-			}, 
-			"address":{
-				"country": document.getElementById("delivery_country").value,
-				"city": document.getElementById("delivery_city").value,
-				"address": document.getElementById("delivery_address").value,
-				"index": document.getElementById("delivery_index").value,
-				"latlng":{
-					"lat": delivery_location.lat,
-					"lng": delivery_location.lng
-				}
-			},	
-			"date": document.getElementById("delivery_date").value
-		}, "package_info":{
-			"size": document.getElementById("size").value,
-			"weight": document.getElementById("weight").value
-		}};
+		//Constructing JSON		
+		const data = { 
+			"id":"1", 
+			"pickup_details": {
+				"name": {
+					"first_name": document.getElementById("pickup_fname").value,
+					"last_name": document.getElementById("pickup_lname").value
+				},
+				"address":{
+					"country": document.getElementById("pickup_country").value,
+					"city": document.getElementById("pickup_city").value,
+					"address": document.getElementById("pickup_address").value,
+					"index": document.getElementById("pickup_index").value,
+					"latlng": {
+						"lat": pickup_location.lat,
+						"lng": pickup_location.lng
+					}
+				},
+				"date": document.getElementById("pickup_date").value
+			},
+			"delivery_details": {
+				"name": {
+					"first_name": document.getElementById("delivery_fname").value,
+					"last_name": document.getElementById("delivery_lname").value
+				},
+				"address":{
+					"country": document.getElementById("delivery_country").value,
+					"city": document.getElementById("delivery_city").value,
+					"address": document.getElementById("delivery_address").value,
+					"index": document.getElementById("delivery_index").value,
+					"latlng": {
+						"lat": delivery_location.lat,
+						"lng": delivery_location.lng
+					}
+				},
+				"date": document.getElementById("delivery_date").value
+			},
+			"package_info": {
+				"size": document.getElementById("size").value,
+				"weight": document.getElementById("weight").value
+			}			
+		};
 		
 		console.log(JSON.stringify(data));
 		
