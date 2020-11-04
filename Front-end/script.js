@@ -17,7 +17,7 @@ window.onload = function load(){
 		 } else {	
 
 			//Sending GET request
-			var address = 'https://localhost:44361/api/Packages/'  + package_number.toString();
+			var address = 'https://localhost:44327/api/Packages'  + package_number.toString();
 			fetch(address, {
 				method: 'GET',
 			})
@@ -321,7 +321,7 @@ window.onload = function load(){
 	document.getElementById("submit_package").onclick = function Send_package_data(){
 		//Constructing JSON
 		console.log("somesing");
-		const data = { "id":"0", "pickup_details": {
+		const data = { "id":"1", "pickup_details": {
 			"name":{
 				"first_name": document.getElementById("pickup_fname").value,
 				"last_name": document.getElementById("pickup_lname").value
@@ -335,7 +335,8 @@ window.onload = function load(){
 					"lat": pickup_location.lat,
 					"lng": pickup_location.lng
 				}
-			}			 
+			},		
+			"date": document.getElementById("pickup_date").value
 		}, "delivery_details":{
 			"name":{
 				"first_name": document.getElementById("delivery_fname").value,
@@ -350,7 +351,8 @@ window.onload = function load(){
 					"lat": delivery_location.lat,
 					"lng": delivery_location.lng
 				}
-			}			 
+			},	
+			"date": document.getElementById("delivery_date").value
 		}, "package_info":{
 			"size": document.getElementById("size").value,
 			"weight": document.getElementById("weight").value
@@ -358,7 +360,7 @@ window.onload = function load(){
 		
 		console.log(JSON.stringify(data));
 		
-		fetch('https://localhost:44361/api/Packages', {
+		fetch('https://localhost:44327/api/Packages', {
 			method: 'POST',
 			headers: {
 			'Content-Type': 'application/json',
