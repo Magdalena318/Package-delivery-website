@@ -87,7 +87,7 @@ p{
 	grid-column: 2;
 }
 
-#package_number_form, #sender_details, #receiver_details, #package_details, #display_package_form, #package_submitted{
+#package_number_form, #sender_details, #receiver_details, #package_details, #display_package_form, #package_submitted , #map_locations{
 	display: none;
 }
 
