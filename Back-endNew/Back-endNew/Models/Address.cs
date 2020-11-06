@@ -29,39 +29,19 @@ namespace Back_endNew.Models
 
 	public class Address
     {
-		string country { get; set; }
-		string city { get; set; }
 		string address { get; set; }
-		string index { get; set; }
+
 		LatLng latlng { get; set; }
 
-		public Address(string _country, string _city, string _address, string _index, double lat, double lng)
+		public Address(string _address, double lat, double lng)
 		{
-			country = _country;
-			city = _city;
 			address = _address;
-			index = _index;
 			latlng = new LatLng(lat, lng);
-		}
-
-		public string getCountry()
-		{
-			return country;
-		}
-
-		public string getCity()
-		{
-			return city;
 		}
 
 		public string getAddress()
 		{
 			return address;
-		}
-
-		public string getIndex()
-		{
-			return index;
 		}
 
 		public LatLng getLatLng()

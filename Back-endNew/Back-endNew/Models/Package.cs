@@ -27,27 +27,19 @@ namespace Back_endNew.Models
 
             //Pickup details
             Name pickup_name = new Name(package.pickup_details.name.first_name, package.pickup_details.name.last_name);
-
-            string pickup_country = package.pickup_details.address.country;
-            string pickup_city = package.pickup_details.address.city;
             string pickup_street_address = package.pickup_details.address.address;
-            string pickup_index = package.pickup_details.address.index;
             double pickup_lat = Convert.ToDouble(package.pickup_details.address.latlng.lat);
             double pickup_lng = Convert.ToDouble(package.pickup_details.address.latlng.lng);
-            Address pickup_address = new Address(pickup_country, pickup_city, pickup_street_address, pickup_index, pickup_lat, pickup_lng);
+            Address pickup_address = new Address(pickup_street_address, pickup_lat, pickup_lng);
             string pickup_date = package.pickup_details.date;
             pickup_details = new EndpointDetails(pickup_name, pickup_address, pickup_date);
 
             //Delivery details
             Name delivery_name = new Name(package.delivery_details.name.first_name, package.delivery_details.name.last_name);
-
-            string delivery_country = package.delivery_details.address.country;
-            string delivery_city = package.delivery_details.address.city;
             string delivery_street_address = package.delivery_details.address.address;
-            string delivery_index = package.delivery_details.address.index;
             double delivery_lat = Convert.ToDouble(package.delivery_details.address.latlng.lat);
             double delivery_lng = Convert.ToDouble(package.delivery_details.address.latlng.lng);
-            Address delivery_address = new Address(delivery_country, delivery_city, delivery_street_address, delivery_index, delivery_lat, delivery_lng);
+            Address delivery_address = new Address(delivery_street_address, delivery_lat, delivery_lng);
             string delivery_date = package.delivery_details.date;
             delivery_details = new EndpointDetails(delivery_name, delivery_address, delivery_date);
 
@@ -62,27 +54,19 @@ namespace Back_endNew.Models
         {
             //Pickup details
             NameJSON pickup_name = new NameJSON(this.pickup_details.getName().getFirstName(), this.pickup_details.getName().getLastName());
-
-            string pickup_country = this.pickup_details.getAddress().getCountry();
-            string pickup_city = this.pickup_details.getAddress().getCity();
             string pickup_street_address = this.pickup_details.getAddress().getAddress();
-            string pickup_index = this.pickup_details.getAddress().getIndex();
             string pickup_lat = this.pickup_details.getAddress().getLatLng().getLat().ToString();
             string pickup_lng = this.pickup_details.getAddress().getLatLng().getLng().ToString();
-            AddressJSON pickup_address = new AddressJSON(pickup_country, pickup_city, pickup_street_address, pickup_index, pickup_lat, pickup_lng);
+            AddressJSON pickup_address = new AddressJSON(pickup_street_address, pickup_lat, pickup_lng);
             string pickup_date = this.pickup_details.getDate();
             EndpointDetailsJSON pickup_details = new EndpointDetailsJSON(pickup_name, pickup_address, pickup_date);
 
             //Delivery details
             NameJSON delivery_name = new NameJSON(this.delivery_details.getName().getFirstName(), this.delivery_details.getName().getLastName());
-
-            string delivery_country = this.delivery_details.getAddress().getCountry();
-            string delivery_city = this.delivery_details.getAddress().getCity();
             string delivery_street_address = this.delivery_details.getAddress().getAddress();
-            string delivery_index = this.delivery_details.getAddress().getIndex();
             string delivery_lat = this.delivery_details.getAddress().getLatLng().getLat().ToString();
             string delivery_lng = this.delivery_details.getAddress().getLatLng().getLng().ToString();
-            AddressJSON delivery_address = new AddressJSON(delivery_country, delivery_city, delivery_street_address, delivery_index, delivery_lat, delivery_lng);
+            AddressJSON delivery_address = new AddressJSON(delivery_street_address, delivery_lat, delivery_lng);
             string delivery_date = this.delivery_details.getDate();
             EndpointDetailsJSON delivery_details = new EndpointDetailsJSON(delivery_name, delivery_address, delivery_date);
 

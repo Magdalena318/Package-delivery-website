@@ -172,7 +172,6 @@
     <Compile Include="JSON\NameJSON.cs" />
     <Compile Include="JSON\PackageInfoJSON.cs" />
     <Compile Include="JSON\PackageJSON.cs" />
-    <Compile Include="JSON\TestJSON.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Database.cs" />
     <Compile Include="Models\EndpointDetails.cs" />
