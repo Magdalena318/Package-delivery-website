@@ -6,6 +6,7 @@ window.onload = function load(){
 	var all_pickup_map;
 	var all_delivery_map;
 	var get_count=0;
+	var id = [];
 	//Looking up a package
 	document.getElementById("lookup_button_open_form").onclick = function Open_package_number(){
 		document.getElementById("type_form").style.display = "none";
@@ -53,17 +54,29 @@ window.onload = function load(){
 			.then(response => response.json())
 			.then(data => {
 				var change_pickup_lat = Number(data.pickup_details.address.latlng.lat);
+				var idnumber = data.id;
 				var change_pickup_lng = Number(data.pickup_details.address.latlng.lng);
 				var change_latlng = L.latLng(change_pickup_lat, change_pickup_lng);
 				console.log(change_latlng);
-				var change_pickup_marker = L.layerGroup().addTo(all_pickup_map);
-				var marker = L.marker(change_latlng).addTo(change_pickup_marker);
+				change_pickup_marker = L.layerGroup().addTo(all_pickup_map);
+				var pickup_marker = L.marker(change_latlng,{customId:idnumber}).addTo(change_pickup_marker);
+				pickup_marker.on('click', function onMarkerClick(){
+					var customId = this.options.customId;
+					var address = 'https://localhost:44327/api/Packages/'  + customId.toString();
+					get_JSON(address);
+				});
 				var change_delivery_lat = Number(data.delivery_details.address.latlng.lat);
 				var change_delivery_lng = Number(data.delivery_details.address.latlng.lng);
 				var change_latlng = L.latLng(change_delivery_lat, change_delivery_lng);
 				console.log(change_latlng);
+
 				var change_delivery_marker = L.layerGroup().addTo(all_delivery_map);
-				var marker = L.marker(change_latlng).addTo(change_delivery_marker);
+				var delivery_marker = L.marker(change_latlng,{customId:idnumber}).addTo(change_delivery_marker);
+				delivery_marker.on('click', function onMarkerClick(){
+					var customId = this.options.customId;
+					var address = 'https://localhost:44327/api/Packages/'  + customId.toString();
+					get_JSON(address);
+				});
 		})
 		.catch((error) => {
 		  console.error('Error:', error);
@@ -80,6 +93,13 @@ window.onload = function load(){
 
 			//Sending GET request
 			var address = 'https://localhost:44327/api/Packages/'  + package_number.toString();
+			get_JSON(address);
+		 }
+		}
+
+		function get_JSON(address)
+		{
+			document.getElementById("map_locations").style.display = "none";
 			fetch(address, {
 				method: 'GET',
 			})
@@ -151,7 +171,6 @@ window.onload = function load(){
 			});
 			
 		 }
-	}
 	
 	document.getElementById("send_button").onclick = function Send_package_display(){
 		document.getElementById("type_form").style.display = "none";
