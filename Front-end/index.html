@@ -51,17 +51,20 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 
 	
 	<!-- Choose action -->
-	<form id="type_form">
+	<div id="type_form">
 		<div class="header">
 			<h1> PACKAGE DELIVERY SERVICE</h1>
 		</div>
 	
 		<br>
 		
-		<input id="send_button" type="button" value="Send a package" />
-		<input id="lookup_button_open_form" type="button" value="Look up a package" />
+		<img id="package_logo" src="package_logo.png" alt="Package logo" >
+		<br><br><br>
+		<input id="send_button" type="button" value="Send a new package" />
+		<input id="lookup_button_open_form" type="button" value="Look up a package by number" />
+		<input id="lookup_button_all" type="button" value="Look up a package on map" />
 
-	</form>
+	</div>
 	
 	<!-- Provide the package number -->
 	<form id="package_number_form">
@@ -75,14 +78,10 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		<input class="input" type="number" id="package_number" name="package_number" required><br><br>
 		
 		<input id="lookup_button" type="button" value="Look up a package" />
-		<input id="lookup_button_all" type="button" value="Look up all packages" />
 	</form>
 	
 	<!-- First form: sender details -->
 	<form id="sender_details">
-		<!-- <div class="header"> -->
-			<!-- <h1> PACKAGE DELIVERY DETAILS</h1> -->
-		<!-- </div> -->
 		
 		<div class="subheader">
 		<h2> Sender Details</h2>
@@ -220,13 +219,13 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		<label class="label" for="change_delivery_lname">Last name:</label>
 		<div id="div_delivery_lname"></div><br>
 
-		<label class="label" for="change_delivery_location">delivery location:</label>
+		<label class="label" for="change_delivery_location">Delivery location:</label>
 		<div class = "map" id="change_delivery_location" required></div><br>
 
 		<label class="label" for="change_delivery_address">Address:</label>
 		<div id="div_delivery_address"></div><br>
 
-		<label class="label" for="change_delivery_date">delivery Date:</label>
+		<label class="label" for="change_delivery_date">Delivery Date:</label>
 		<div id="div_delivery_date"></div><br>
 		
 		<input class="homepage" id="lookup_homepage" type="button" value="Go to the homepage">
@@ -245,6 +244,9 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 	</form>
 	
 	<form id="map_locations">
+		<div class="header">
+			<h1> PACKAGE DELIVERY LOCATIONS</h1>
+		</div><br>
 		<label class="label" for="All_pickup_location">All Pickup location:</label>
 		<div class = "map" id="All_pickup_location" required></div><br>
 		<label class="label" for="All_delivery_location">All Delivery location:</label>

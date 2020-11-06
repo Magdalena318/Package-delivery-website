@@ -1,12 +1,12 @@
 window.onload = function load(){
 	
-	window.scrollTo(0, 0);
 	var id_stored = 1;
 	var constant_id = 10000000;
 	var all_pickup_map;
 	var all_delivery_map;
 	var get_count=0;
 	var id = [];
+	
 	//Looking up a package
 	document.getElementById("lookup_button_open_form").onclick = function Open_package_number(){
 		document.getElementById("type_form").style.display = "none";
@@ -41,8 +41,7 @@ window.onload = function load(){
 	document.getElementById("lookup_button_all").onclick = function Lookup_all_package(){
 		ReturnHome();
 		document.getElementById("map_locations").style.display = "grid";
-		document.getElementById("send_button").style.display = "none";
-		document.getElementById("lookup_button_open_form").style.display = "none";
+		document.getElementById("type_form").style.display = "none";
 		get_count++;
 		create_map();
 		for(var i = 0 ; i < id_stored ; i++)
@@ -219,10 +218,8 @@ window.onload = function load(){
 		document.getElementById("package_details").style.display = "none";
 		document.getElementById("display_package_form").style.display = "none";
 		document.getElementById("package_submitted").style.display = "none";
-		document.getElementById("type_form").style.display = "grid";
+		document.getElementById("type_form").style.display = "block";
 		document.getElementById("map_locations").style.display = "none";
-		document.getElementById("send_button").style.display = "grid";
-		document.getElementById("lookup_button_open_form").style.display = "grid";
 	}
 	document.getElementById("lookup_homepage").addEventListener("click", ReturnHome);
 	document.getElementById("submitted_homepage").addEventListener("click", ReturnHome);

@@ -5,6 +5,25 @@ body
 	background-color: #FEF8DD;
 }
 
+/* Main page */
+#type-form{
+	margin: 0 auto;
+	width: 600px;
+}
+
+#send_button, #lookup_button_all, #lookup_button_open_form{
+	width: 275px;
+	display: block;
+	align: left;
+}
+
+#package_logo{
+	width: 300px;
+	height: 200px;
+	float: right;
+}
+
+/* Forms */
 form{
 	margin: 0 auto;
 	width: 600px;
@@ -53,18 +72,21 @@ p{
 	grid-column:1;
 	text-align: left;
 	height: 1.5em;
-	font-weight : bold ;
+	font-weight : bold;
+	width: 150px;
 }
 
 .input{
 	grid-column:2;
 	height:18px;
 	font-weight : bold ;
+	width: 450px;
 }
 
 .map{
 	grid-column:2;
 	height: 180px;
+	width: 450px;
 }
 
 .delivered{
@@ -75,18 +97,12 @@ p{
 	grid-column:2;
 }
 
+/* Refresh buttons */
 #pickup_refresh, #delivery_refresh{
 	grid-column:2;
 }
 
-#send_button{
-	grid-column: 1;
-}
-
-#lookup_button_open_form{
-	grid-column: 2;
-}
-
+/* Hiding forms */
 #package_number_form, #sender_details, #receiver_details, #package_details, #display_package_form, #package_submitted , #map_locations{
 	display: none;
 }
