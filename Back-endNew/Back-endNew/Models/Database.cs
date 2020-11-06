@@ -50,5 +50,9 @@ namespace Back_endNew.Models
             packages.Add(p);
         }
 
+        public List<Package> GetDatabase() {
+            return packages;
+        }
+
     }
 }

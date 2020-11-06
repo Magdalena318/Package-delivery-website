@@ -1,5 +1,6 @@
 ﻿using Back_endNew.JSON;
 using Back_endNew.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,14 @@ namespace Back_endNew.Controllers
         private static Database data = new Database();
 
         // GET: api/Packages
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            PackageJSON[] packages = new PackageJSON[] { };
+            foreach (Package p in data.GetDatabase()) {
+                PackageJSON p_json = p.ToJSON();
+                packages.Append(p_json);
+            }
+            return Ok(packages);
         }
 
         // GET: api/Packages/5
