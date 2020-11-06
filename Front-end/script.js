@@ -447,6 +447,7 @@ window.onload = function load(){
 				document.getElementById("receiver_details").style.display = "none";
 				document.getElementById("package_details").style.display = "none";
 				document.getElementById("package_submitted").style.display = "grid";
+				document.getElementById("success").textContent = "Package has been submitted successfully! Package number is ";
 				document.getElementById("success").textContent = document.getElementById("success").textContent + data;
 		})
 		.catch((error) => {
