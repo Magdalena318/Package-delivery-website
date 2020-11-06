@@ -1,13 +1,76 @@
 window.onload = function load(){
 	
 	window.scrollTo(0, 0);
-	
+	var id_stored = 1;
+	var constant_id = 10000000;
+	var all_pickup_map;
+	var all_delivery_map;
+	var get_count=0;
 	//Looking up a package
 	document.getElementById("lookup_button_open_form").onclick = function Open_package_number(){
 		document.getElementById("type_form").style.display = "none";
 		document.getElementById("package_number_form").style.display = "grid";
+		document.getElementById("map_locations").style.display = "none";
 	}
 	
+	function create_map()
+	{
+		if(get_count == 1)
+		{
+		 all_pickup_map = L.map('All_pickup_location').setView([52.2297, 21.0122], 13);
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+		maxZoom: 18,
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1,
+		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
+	}).addTo(all_pickup_map);
+		
+	 all_delivery_map = L.map('All_delivery_location').setView([52.2297, 21.0122], 13);
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+		maxZoom: 18,
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1,
+		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
+	}).addTo(all_delivery_map);
+		}
+	}
+
+	document.getElementById("lookup_button_all").onclick = function Lookup_all_package(){
+		ReturnHome();
+		document.getElementById("map_locations").style.display = "grid";
+		document.getElementById("send_button").style.display = "none";
+		document.getElementById("lookup_button_open_form").style.display = "none";
+		get_count++;
+		create_map();
+		for(var i = 0 ; i < id_stored ; i++)
+		{
+		var address = 'https://localhost:44327/api/Packages/' + (constant_id+i).toString();
+		fetch(address, {
+			method: 'GET',
+		})
+			.then(response => response.json())
+			.then(data => {
+				var change_pickup_lat = Number(data.pickup_details.address.latlng.lat);
+				var change_pickup_lng = Number(data.pickup_details.address.latlng.lng);
+				var change_latlng = L.latLng(change_pickup_lat, change_pickup_lng);
+				console.log(change_latlng);
+				var change_pickup_marker = L.layerGroup().addTo(all_pickup_map);
+				var marker = L.marker(change_latlng).addTo(change_pickup_marker);
+				var change_delivery_lat = Number(data.delivery_details.address.latlng.lat);
+				var change_delivery_lng = Number(data.delivery_details.address.latlng.lng);
+				var change_latlng = L.latLng(change_delivery_lat, change_delivery_lng);
+				console.log(change_latlng);
+				var change_delivery_marker = L.layerGroup().addTo(all_delivery_map);
+				var marker = L.marker(change_latlng).addTo(change_delivery_marker);
+		})
+		.catch((error) => {
+		  console.error('Error:', error);
+		});
+	}
+}
+
 	document.getElementById("lookup_button").onclick = function Lookup_package(){
 		 var package_number = document.getElementById("package_number").value;
 		 if(package_number == null || package_number == ""){
@@ -150,9 +213,13 @@ window.onload = function load(){
 		document.getElementById("display_package_form").style.display = "none";
 		document.getElementById("package_submitted").style.display = "none";
 		document.getElementById("type_form").style.display = "grid";
+		document.getElementById("map_locations").style.display = "none";
+		document.getElementById("send_button").style.display = "grid";
+		document.getElementById("lookup_button_open_form").style.display = "grid";
 	}
 	document.getElementById("lookup_homepage").addEventListener("click", ReturnHome);
 	document.getElementById("submitted_homepage").addEventListener("click", ReturnHome);
+	document.getElementById("all_lookup_homepage").addEventListener("click", ReturnHome);
 
 	//Map for Pickup
 	var pickup_map = L.map('pickup_location').setView([52.2297, 21.0122], 13);
@@ -449,6 +516,7 @@ window.onload = function load(){
 				document.getElementById("package_submitted").style.display = "grid";
 				document.getElementById("success").textContent = "Package has been submitted successfully! Package number is ";
 				document.getElementById("success").textContent = document.getElementById("success").textContent + data;
+				id_stored++;
 		})
 		.catch((error) => {
 		  console.error('Error:', error);
