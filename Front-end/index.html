@@ -75,6 +75,7 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		<input class="input" type="number" id="package_number" name="package_number" required><br><br>
 		
 		<input id="lookup_button" type="button" value="Look up a package" />
+		<input id="lookup_button_all" type="button" value="Look up all packages" />
 	</form>
 	
 	<!-- First form: sender details -->
@@ -773,5 +774,13 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		<input class="homepage" id="submitted_homepage" type="button" value="Go to the homepage">
 	</form>
 	
+	<form id="map_locations">
+		<label class="label" for="All_pickup_location">All Pickup location:</label>
+		<div class = "map" id="All_pickup_location" required></div><br>
+		<label class="label" for="All_delivery_location">All Delivery location:</label>
+		<div class = "map" id="All_delivery_location" required></div><br>
+		<input class="homepage" id="all_lookup_homepage" type="button" value="Go to the homepage">
+	</form>
+
 	</body>	
-<html/>
+</html>
