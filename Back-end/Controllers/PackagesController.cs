@@ -26,7 +26,6 @@ namespace Back_end.Controllers
             Package requested = data.FindPackage(id);
             if (requested == null)
             {
-
                 return NotFound();
             }
 

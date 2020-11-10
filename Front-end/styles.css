@@ -6,7 +6,7 @@ body
 }
 
 /* Main page */
-#type-form{
+#type-form, #map_locations{
 	margin: 0 auto;
 	width: 600px;
 }
@@ -24,7 +24,13 @@ body
 }
 
 /*Look up on map page*/
-#all_packages_map, #all_lookup_homepage{
+#all_packages_map{
+	width: 100%;
+	height: 500px;
+}
+
+
+#all_lookup_homepage{
 	width: 100%;
 }
 

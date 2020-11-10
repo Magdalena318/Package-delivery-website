@@ -26,7 +26,7 @@ window.onload = function load(){
 			id: 'mapbox/streets-v11',
 			tileSize: 512,
 			zoomOffset: -1,
-			accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
+			accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
 		}).addTo(display_pickup_map);
 		var display_pickup_markers = L.layerGroup().addTo(display_pickup_map);
 		var display_pickup_marker = L.marker(display_pickup_latlng).addTo(display_pickup_markers);
@@ -48,10 +48,12 @@ window.onload = function load(){
 			id: 'mapbox/streets-v11',
 			tileSize: 512,
 			zoomOffset: -1,
-			accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
+			accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
 		}).addTo(display_delivery_map);
 		var display_delivery_markers = L.layerGroup().addTo(display_delivery_map);
 		var display_delivery_marker = L.marker(display_delivery_latlng).addTo(display_delivery_markers);
+		
+		display_package_form.style.display = "grid";
 	}
 	
 	//Look up by number
@@ -77,23 +79,45 @@ window.onload = function load(){
 					document.getElementById("package_details").style.display = "none";
 					
 					display_json(data);
-					
-					display_package_form.style.display = "grid";
 				})
 		}
 	}
 	
 	//Looking up a package on a map
 	
-	var lookup_map = L.map('all_packages_map').setView([52.2297, 21.0122], 13);
+	var lookup_map = L.map('all_packages_map').setView([0.0, 50], 1);
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 		maxZoom: 18,
 		id: 'mapbox/streets-v11',
 		tileSize: 512,
 		zoomOffset: -1,
-		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
+		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
 	}).addTo(lookup_map);
 	var markers_layer = L.layerGroup().addTo(lookup_map);
+	
+	//Marker styles
+	var myCustomColour = '#583470';
+
+	const markerHtmlStyles = `
+	  background-color: ${myCustomColour};
+	  width: 1rem;
+	  height: 1rem;
+	  display: block;
+	  left: -1.5rem;
+	  top: -1.5rem;
+	  position: relative;
+	  border-radius: 1rem 1rem 0;
+	  transform: rotate(45deg);
+	  border: 1px solid #FFFFFF`;
+
+	const icon = L.divIcon({
+	  className: "my-custom-pin",
+	  iconAnchor: [0, 24],
+	  labelAnchor: [-6, 0],
+	  popupAnchor: [0, -36],
+	  html: `<span style="${markerHtmlStyles}" />`
+	})
+		
 	
 	//Displaying the info on the map
 	document.getElementById("lookup_button_all").onclick = function Lookup_packages_map(){
@@ -109,24 +133,45 @@ window.onload = function load(){
 				//Hide other forms
 				document.getElementById("type_form").style.display = "none";
 				document.getElementById("map_locations").style.display = "block";
-				
 
+				//Adding markers and listeners
 				markers_layer.clearLayers();
-				for(i = 0;  i < data.length; i++){
-					var cur_pickup_lat = Number(data[0].pickup_details.latlng.lat);
-					var cur_pickup_lng = Number(data[0].pickup_details.latlng.lng);					
-					var cur_pickup_latlng = L.latLng(cur_pickup_lat, cur_pickup_lng);
-					var cur_pickup_marker = L.marker(cur_pickup_latlng).addTo(markers_layer);
+				for(var i = 0;  i < data.length; i++){	
+					var cur_data = data[i];
+					console.log(i);
 					
-					var cur_delivery_lat = Number(data[0].delivery_details.latlng.lat);
-					var cur_delivery_lng = Number(data[0].delivery_details.latlng.lng);					
+					var cur_pickup_lat = Number(cur_data.pickup_details.latlng.lat);
+					var cur_pickup_lng = Number(cur_data.pickup_details.latlng.lng);					
+					var cur_pickup_latlng = L.latLng(cur_pickup_lat, cur_pickup_lng);
+					var cur_pickup_marker = L.marker(cur_pickup_latlng, {icon: icon, title: "pickup: " + cur_data.id}).addTo(markers_layer);
+					console.log(markers_layer.getLayers().length);
+					console.log(cur_pickup_latlng);
+					// cur_pickup_marker.on('click', function(){					
+						// var parts = this.options.title.split(: );
+						// const found = array1.find(element => element > 10);
+						// display_json(cur_data);						
+					// });
+					
+					var cur_delivery_lat = Number(cur_data.delivery_details.latlng.lat);
+					var cur_delivery_lng = Number(cur_data.delivery_details.latlng.lng);					
 					var cur_delivery_latlng = L.latLng(cur_delivery_lat, cur_delivery_lng);
-					var cur_delivery_marker = L.marker(cur_delivery_latlng).addTo(markers_layer);
+					var cur_delivery_marker = L.marker(cur_delivery_latlng, {icon: icon, title: "delivery: " + cur_data.id}).addTo(markers_layer);		
+					console.log(markers_layer.getLayers().length);	
+					console.log(cur_delivery_latlng);
+					// // cur_delivery_marker.on('click', function(){					
+						// // display_json(cur_data);						
+					// // });
+					lookup_map.invalidateSize();
 				}				
-
+				console.log(markers_layer.getLayers().length);
 			})
 	}
 	
+	// function Marker_display(){					
+		// var parts = this.options.title.split(: );
+		// const found = array1.find(element => element > 10);
+		// display_json(cur_data);						
+	// });
 		 
 /************************************************************************** OPEN/CLOSE FORMS **********************************************************************************/
 	
@@ -208,10 +253,11 @@ window.onload = function load(){
 		id: 'mapbox/streets-v11',
 		tileSize: 512,
 		zoomOffset: -1,
-		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
+		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
 	}).addTo(pickup_map);
 	var pickup_marker = L.layerGroup().addTo(pickup_map);
 	var pickup_location;
+	pickup_map.invalidateSize();
 	
 	
 	//Geocoding pickup
@@ -234,6 +280,7 @@ window.onload = function load(){
 				pickup_map.setView(latlng, 13)
 				pickup_marker.clearLayers();
 				var marker = L.marker(latlng).addTo(pickup_marker);
+				pickup_map.invalidateSize();
 				pickup_location = latlng;
 			});
 			
@@ -250,6 +297,7 @@ window.onload = function load(){
 		
 		var marker = L.marker(e.latlng).addTo(pickup_marker);
 		pickup_location = e.latlng;
+		pickup_map.invalidateSize();
 		
 		geocodeService.reverse().latlng(e.latlng).run(function (error, result) {
 			if (error) {
@@ -268,15 +316,13 @@ window.onload = function load(){
 		id: 'mapbox/streets-v11',
 		tileSize: 512,
 		zoomOffset: -1,
-		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
+		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
 	}).addTo(delivery_map);
 	var delivery_marker = L.layerGroup().addTo(delivery_map);
 	var delivery_location;
+	delivery_map.invalidateSize();
 	
 	//Geocoding delivery
-
-	
-	//Refresh map with new address
 	document.getElementById("delivery_refresh").onclick = function Delivery_refresh(){
 		var delivery_address = document.getElementById("delivery_address").value;
 		
@@ -294,6 +340,7 @@ window.onload = function load(){
 				delivery_map.setView(latlng, 13)
 				delivery_marker.clearLayers();
 				var marker = L.marker(latlng).addTo(delivery_marker);
+				delivery_map.invalidateSize();
 				delivery_location = latlng;
 			});
 			
@@ -307,6 +354,7 @@ window.onload = function load(){
 		
 		var marker = L.marker(e.latlng).addTo(delivery_marker);
 		delivery_location = e.latlng;
+		delivery_map.invalidateSize();
 		
 		geocodeService.reverse().latlng(e.latlng).run(function (error, result) {
 			if (error) {
