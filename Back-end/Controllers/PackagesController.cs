@@ -15,15 +15,22 @@ namespace Back_end.Controllers
         private static Database data = new Database();
 
         // GET: api/Packages
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(data.GetDatabase());
         }
 
         // GET: api/Packages/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            Package requested = data.FindPackage(id);
+            if (requested == null)
+            {
+
+                return NotFound();
+            }
+
+            return Ok(requested);
         }
 
         // POST: api/Packages
@@ -35,7 +42,7 @@ namespace Back_end.Controllers
             }
 
             int new_id = data.NextId();
-            //p.id = new_id;
+            p.id = new_id;
             data.AddNewPackage(p);
             return Ok(new_id);
         }

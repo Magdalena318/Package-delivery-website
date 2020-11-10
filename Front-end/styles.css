@@ -23,6 +23,11 @@ body
 	float: right;
 }
 
+/*Look up on map page*/
+#all_packages_map, #all_lookup_homepage{
+	width: 100%;
+}
+
 /* Forms */
 form{
 	margin: 0 auto;

@@ -1,170 +1,143 @@
 window.onload = function load(){
 	
-	var id_stored = 1;
-	var constant_id = 10000000;
-	var all_pickup_map;
-	var all_delivery_map;
-	var get_count=0;
-	var id = [];
+/************************************************************************** LOOK UP PACKAGE **********************************************************************************/
 	
-	//Looking up a package
-	document.getElementById("lookup_button_open_form").onclick = function Open_package_number(){
-		document.getElementById("type_form").style.display = "none";
-		document.getElementById("package_number_form").style.display = "grid";
-		document.getElementById("map_locations").style.display = "none";
-	}
-	
-	function create_map()
-	{
-		if(get_count == 1)
-		{
-		 all_pickup_map = L.map('All_pickup_location').setView([52.2297, 21.0122], 13);
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-		maxZoom: 18,
-		id: 'mapbox/streets-v11',
-		tileSize: 512,
-		zoomOffset: -1,
-		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
-	}).addTo(all_pickup_map);
+	//Filling out "display_package_form" from the passed json
+	function display_json(data){
+		//Displaying package info
+		document.getElementById("display_package_id").innerText = data.id;
+		document.getElementById("display_size").innerText = data.size;
+		document.getElementById("display_weight").innerText = data.weight;
 		
-	 all_delivery_map = L.map('All_delivery_location').setView([52.2297, 21.0122], 13);
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-		maxZoom: 18,
-		id: 'mapbox/streets-v11',
-		tileSize: 512,
-		zoomOffset: -1,
-		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
-	}).addTo(all_delivery_map);
-		}
+		//Displaying pickup details
+		document.getElementById("display_pickup_fname").innerText = data.pickup_details.first_name;
+		document.getElementById("display_pickup_lname").innerText = data.pickup_details.last_name;
+		document.getElementById("display_pickup_address").innerText = data.pickup_details.address;
+		document.getElementById("display_pickup_date").innerText = data.pickup_details.date;
+		
+		var display_pickup_lat = Number(data.pickup_details.latlng.lat);
+		var display_pickup_lng = Number(data.pickup_details.latlng.lng);
+		var display_pickup_latlng = L.latLng(display_pickup_lat, display_pickup_lng);
+		console.log(display_pickup_latlng);
+		
+		var display_pickup_map = L.map("display_pickup_location").setView(display_pickup_latlng, 13);
+		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+			maxZoom: 18,
+			id: 'mapbox/streets-v11',
+			tileSize: 512,
+			zoomOffset: -1,
+			accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
+		}).addTo(display_pickup_map);
+		var display_pickup_markers = L.layerGroup().addTo(display_pickup_map);
+		var display_pickup_marker = L.marker(display_pickup_latlng).addTo(display_pickup_markers);
+		
+		//Displaying delivery details
+		document.getElementById("display_delivery_fname").innerText = data.delivery_details.first_name;
+		document.getElementById("display_delivery_lname").innerText = data.delivery_details.last_name;
+		document.getElementById("display_delivery_address").innerText = data.delivery_details.address;
+		document.getElementById("display_delivery_date").innerText = data.delivery_details.date;
+		
+		var display_delivery_lat = Number(data.delivery_details.latlng.lat);
+		var display_delivery_lng = Number(data.delivery_details.latlng.lng);
+		var display_delivery_latlng = L.latLng(display_delivery_lat, display_delivery_lng);
+		console.log(display_delivery_latlng);
+		
+		var display_delivery_map = L.map("display_delivery_location").setView(display_delivery_latlng, 13);
+		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+			maxZoom: 18,
+			id: 'mapbox/streets-v11',
+			tileSize: 512,
+			zoomOffset: -1,
+			accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
+		}).addTo(display_delivery_map);
+		var display_delivery_markers = L.layerGroup().addTo(display_delivery_map);
+		var display_delivery_marker = L.marker(display_delivery_latlng).addTo(display_delivery_markers);
 	}
-
-	document.getElementById("lookup_button_all").onclick = function Lookup_all_package(){
-		ReturnHome();
-		document.getElementById("map_locations").style.display = "grid";
-		document.getElementById("type_form").style.display = "none";
-		get_count++;
-		create_map();
-		for(var i = 0 ; i < id_stored ; i++)
-		{
-		var address = 'https://localhost:44327/api/Packages/' + (constant_id+i).toString();
-		fetch(address, {
-			method: 'GET',
-		})
-			.then(response => response.json())
-			.then(data => {
-				var change_pickup_lat = Number(data.pickup_details.address.latlng.lat);
-				var idnumber = data.id;
-				var change_pickup_lng = Number(data.pickup_details.address.latlng.lng);
-				var change_latlng = L.latLng(change_pickup_lat, change_pickup_lng);
-				console.log(change_latlng);
-				change_pickup_marker = L.layerGroup().addTo(all_pickup_map);
-				var pickup_marker = L.marker(change_latlng,{customId:idnumber}).addTo(change_pickup_marker);
-				pickup_marker.on('click', function onMarkerClick(){
-					var customId = this.options.customId;
-					var address = 'https://localhost:44327/api/Packages/'  + customId.toString();
-					get_JSON(address);
-				});
-				var change_delivery_lat = Number(data.delivery_details.address.latlng.lat);
-				var change_delivery_lng = Number(data.delivery_details.address.latlng.lng);
-				var change_latlng = L.latLng(change_delivery_lat, change_delivery_lng);
-				console.log(change_latlng);
-
-				var change_delivery_marker = L.layerGroup().addTo(all_delivery_map);
-				var delivery_marker = L.marker(change_latlng,{customId:idnumber}).addTo(change_delivery_marker);
-				delivery_marker.on('click', function onMarkerClick(){
-					var customId = this.options.customId;
-					var address = 'https://localhost:44327/api/Packages/'  + customId.toString();
-					get_JSON(address);
-				});
-		})
-		.catch((error) => {
-		  console.error('Error:', error);
-		});
-	}
-}
-
+	
+	//Look up by number
 	document.getElementById("lookup_button").onclick = function Lookup_package(){
-		 var package_number = document.getElementById("package_number").value;
-		 if(package_number == null || package_number == ""){
-			 window.alert("Please enter the package number!");
-			 return;
-		 } else {	
-
+		var package_number = document.getElementById("package_number").value;
+		if(package_number == null || package_number == ""){
+			window.alert("Please enter the package number!");
+			return;
+		} else {	
 			//Sending GET request
-			var address = 'https://localhost:44327/api/Packages/'  + package_number.toString();
-			get_JSON(address);
-		 }
-		}
-
-		function get_JSON(address)
-		{
-			document.getElementById("map_locations").style.display = "none";
+			var address = 'https://localhost:44329/api/Packages/'  + package_number.toString();
 			fetch(address, {
 				method: 'GET',
 			})
 				.then(response => response.json())
 				.then(data => {
 					console.log('Success:', data);
+					
+					//Hide other forms
 					document.getElementById("package_number_form").style.display = "none";
 					document.getElementById("sender_details").style.display = "none";
 					document.getElementById("receiver_details").style.display = "none";
 					document.getElementById("package_details").style.display = "none";
 					
-					//Displaying pickup details
-					document.getElementById("div_pickup_fname").innerText = data.pickup_details.name.first_name;
-					document.getElementById("div_pickup_lname").innerText = data.pickup_details.name.last_name;
-					document.getElementById("div_pickup_address").innerText = data.pickup_details.address.address;
-					document.getElementById("div_pickup_date").innerText = data.pickup_details.date;
-					
-					var change_pickup_lat = Number(data.pickup_details.address.latlng.lat);
-					var change_pickup_lng = Number(data.pickup_details.address.latlng.lng);
-					var change_latlng = L.latLng(change_pickup_lat, change_pickup_lng);
-					console.log(change_latlng);
-					var change_pickup_map = L.map("change_pickup_location").setView(change_latlng, 13);
-					L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-						maxZoom: 18,
-						id: 'mapbox/streets-v11',
-						tileSize: 512,
-						zoomOffset: -1,
-						accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
-					}).addTo(change_pickup_map);
-					var change_pickup_marker = L.layerGroup().addTo(change_pickup_map);
-					var marker = L.marker(change_latlng).addTo(change_pickup_marker);
-					
-					//Displaying delivery details
-					document.getElementById("div_delivery_fname").innerText = data.delivery_details.name.first_name;
-					document.getElementById("div_delivery_lname").innerText = data.delivery_details.name.last_name;
-					document.getElementById("div_delivery_address").innerText = data.delivery_details.address.address;
-					document.getElementById("div_delivery_date").innerText = data.delivery_details.date;
-					
-					var change_delivery_lat = Number(data.delivery_details.address.latlng.lat);
-					var change_delivery_lng = Number(data.delivery_details.address.latlng.lng);
-					var change_latlng = L.latLng(change_delivery_lat, change_delivery_lng);
-					console.log(change_latlng);
-					var change_delivery_map = L.map("change_delivery_location").setView(change_latlng, 13);
-					L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-						maxZoom: 18,
-						id: 'mapbox/streets-v11',
-						tileSize: 512,
-						zoomOffset: -1,
-						accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
-					}).addTo(change_delivery_map);
-					var change_delivery_marker = L.layerGroup().addTo(change_delivery_map);
-					var marker = L.marker(change_latlng).addTo(change_delivery_marker);
-					
-					//Displaying package info
-					document.getElementById("display_package_id").innerText = data.id;
-					document.getElementById("div_size").innerText = data.package_info.size;
-					document.getElementById("div_weight").innerText = data.package_info.weight;
+					display_json(data);
 					
 					display_package_form.style.display = "grid";
-			})
-			.catch((error) => {
-			  console.error('Error:', error);
-			});
-			
-		 }
+				})
+		}
+	}
 	
+	//Looking up a package on a map
+	
+	var lookup_map = L.map('all_packages_map').setView([52.2297, 21.0122], 13);
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+		maxZoom: 18,
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1,
+		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNrZ2ljeHp3eTAyZXIydHN1bTFmcTdxZG0ifQ.UwB5VeAMvyI5EfZ6kA4KSQ'
+	}).addTo(lookup_map);
+	var markers_layer = L.layerGroup().addTo(lookup_map);
+	
+	//Displaying the info on the map
+	document.getElementById("lookup_button_all").onclick = function Lookup_packages_map(){
+		//Sending GET request
+		var address = 'https://localhost:44329/api/Packages/';
+		fetch(address, {
+			method: 'GET',
+		})
+			.then(response => response.json())
+			.then(data => {
+				console.log('Success:', data);
+				
+				//Hide other forms
+				document.getElementById("type_form").style.display = "none";
+				document.getElementById("map_locations").style.display = "block";
+				
+
+				markers_layer.clearLayers();
+				for(i = 0;  i < data.length; i++){
+					var cur_pickup_lat = Number(data[0].pickup_details.latlng.lat);
+					var cur_pickup_lng = Number(data[0].pickup_details.latlng.lng);					
+					var cur_pickup_latlng = L.latLng(cur_pickup_lat, cur_pickup_lng);
+					var cur_pickup_marker = L.marker(cur_pickup_latlng).addTo(markers_layer);
+					
+					var cur_delivery_lat = Number(data[0].delivery_details.latlng.lat);
+					var cur_delivery_lng = Number(data[0].delivery_details.latlng.lng);					
+					var cur_delivery_latlng = L.latLng(cur_delivery_lat, cur_delivery_lng);
+					var cur_delivery_marker = L.marker(cur_delivery_latlng).addTo(markers_layer);
+				}				
+
+			})
+	}
+	
+		 
+/************************************************************************** OPEN/CLOSE FORMS **********************************************************************************/
+	
+	//Looking up a package by number
+	document.getElementById("lookup_button_open_form").onclick = function Open_package_number(){
+		document.getElementById("type_form").style.display = "none";
+		document.getElementById("package_number_form").style.display = "grid";
+		document.getElementById("map_locations").style.display = "none";
+	}
+
+	//Open send package form
 	document.getElementById("send_button").onclick = function Send_package_display(){
 		document.getElementById("type_form").style.display = "none";
 		document.getElementById("package_number_form").style.display = "none";
@@ -225,6 +198,9 @@ window.onload = function load(){
 	document.getElementById("submitted_homepage").addEventListener("click", ReturnHome);
 	document.getElementById("all_lookup_homepage").addEventListener("click", ReturnHome);
 
+
+	/************************************************************************** SEND PACKAGE PART***********************************************************************************/
+	
 	//Map for Pickup
 	var pickup_map = L.map('pickup_location').setView([52.2297, 21.0122], 13);
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -392,7 +368,6 @@ window.onload = function load(){
 				document.getElementById("package_submitted").style.display = "grid";
 				document.getElementById("success").textContent = "Package has been submitted successfully! Package number is ";
 				document.getElementById("success").textContent = document.getElementById("success").textContent + data;
-				id_stored++;
 		})
 		.catch((error) => {
 		  console.error('Error:', error);

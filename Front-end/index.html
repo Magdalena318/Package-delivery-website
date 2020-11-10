@@ -177,12 +177,13 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		<label class="label" for="display_package_id">Package id:</label>
 		<div id="display_package_id"></div>
 		
-		<label class="label" for="change_size">Size:</label>
-		<div id="div_size"></div>
+		<label class="label" for="display_size">Size:</label>
+		<div id="display_size"></div>
 		
-		<label class="label" for="change_weight">Weight:</label>
-		<div id="div_weight"></div>
+		<label class="label" for="display_weight">Weight:</label>
+		<div id="display_weight"></div>
 		
+		<br>
 	
 		<!-- Displaying pickup info -->
 		<div class="subheader">
@@ -191,20 +192,20 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		
 		<br>
 
-		<label class="label" for="change_pickup_fname">First name:</label>
-		<div id="div_pickup_fname"></div><br>
+		<label class="label" for="display_pickup_fname">First name:</label>
+		<div id="display_pickup_fname"></div><br>
 
-		<label class="label" for="change_pickup_lname">Last name:</label>
-		<div id="div_pickup_lname"></div><br>
+		<label class="label" for="display_pickup_lname">Last name:</label>
+		<div id="display_pickup_lname"></div><br>
 
-		<label class="label" for="change_pickup_location">Pickup location:</label>
-		<div class = "map" id="change_pickup_location" required></div><br>
+		<label class="label" for="display_pickup_location">Pickup location:</label>
+		<div class = "map" id="display_pickup_location" required></div><br>
 
-		<label class="label" for="change_pickup_address">Address:</label>
-		<div id="div_pickup_address"></div><br>
+		<label class="label" for="display_pickup_address">Address:</label>
+		<div id="display_pickup_address"></div><br>
 
-		<label class="label" for="change_pickup_date">Pickup Date:</label>
-		<div id="div_pickup_date"></div><br>
+		<label class="label" for="display_pickup_date">Pickup Date:</label>
+		<div id="display_pickup_date"></div><br>
 		
 		<!-- Displaying delivery info -->
 		<div class="subheader">
@@ -213,20 +214,20 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		
 		<br>
 
-		<label class="label" for="change_delivery_fname">First name:</label>
-		<div id="div_delivery_fname"></div><br>
+		<label class="label" for="display_delivery_fname">First name:</label>
+		<div id="display_delivery_fname"></div><br>
 
-		<label class="label" for="change_delivery_lname">Last name:</label>
-		<div id="div_delivery_lname"></div><br>
+		<label class="label" for="display_delivery_lname">Last name:</label>
+		<div id="display_delivery_lname"></div><br>
 
-		<label class="label" for="change_delivery_location">Delivery location:</label>
-		<div class = "map" id="change_delivery_location" required></div><br>
+		<label class="label" for="display_delivery_location">Delivery location:</label>
+		<div class = "map" id="display_delivery_location" required></div><br>
 
-		<label class="label" for="change_delivery_address">Address:</label>
-		<div id="div_delivery_address"></div><br>
+		<label class="label" for="display_delivery_address">Address:</label>
+		<div id="display_delivery_address"></div><br>
 
-		<label class="label" for="change_delivery_date">Delivery Date:</label>
-		<div id="div_delivery_date"></div><br>
+		<label class="label" for="display_delivery_date">Delivery Date:</label>
+		<div id="display_delivery_date"></div><br>
 		
 		<input class="homepage" id="lookup_homepage" type="button" value="Go to the homepage">
 		
@@ -243,16 +244,16 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		<input class="homepage" id="submitted_homepage" type="button" value="Go to the homepage">
 	</form>
 	
-	<form id="map_locations">
+	<div id="map_locations">
 		<div class="header">
 			<h1> PACKAGE DELIVERY LOCATIONS</h1>
-		</div><br>
-		<label class="label" for="All_pickup_location">All Pickup location:</label>
-		<div class = "map" id="All_pickup_location" required></div><br>
-		<label class="label" for="All_delivery_location">All Delivery location:</label>
-		<div class = "map" id="All_delivery_location" required></div><br>
+		</div>
+		
+		<p>Please choose a package by clicking on either its pickup or delivery location:</p>
+		<div class = "map" id="all_packages_map" required></div><br>
+
 		<input class="homepage" id="all_lookup_homepage" type="button" value="Go to the homepage">
-	</form>
+	</div>
 
 	</body>	
 </html>
