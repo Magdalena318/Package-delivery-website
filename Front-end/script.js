@@ -351,42 +351,32 @@ window.onload = function load(){
 		const data = { 
 			"id":"1", 
 			"pickup_details": {
-				"name": {
-					"first_name": document.getElementById("pickup_fname").value,
-					"last_name": document.getElementById("pickup_lname").value
-				},
-				"address":{
-					"address": document.getElementById("pickup_address").value,
-					"latlng": {
-						"lat": pickup_location.lat,
-						"lng": pickup_location.lng
-					}
-				},
+				"first_name": document.getElementById("pickup_fname").value,
+				"last_name": document.getElementById("pickup_lname").value,
+				"address": document.getElementById("pickup_address").value,
+				"latlng": {
+					"lat": pickup_location.lat,
+					"lng": pickup_location.lng
+				},				
 				"date": document.getElementById("pickup_date").value
 			},
 			"delivery_details": {
-				"name": {
-					"first_name": document.getElementById("delivery_fname").value,
-					"last_name": document.getElementById("delivery_lname").value
-				},
-				"address":{
-					"address": document.getElementById("delivery_address").value,
-					"latlng": {
-						"lat": delivery_location.lat,
-						"lng": delivery_location.lng
-					}
+				"first_name": document.getElementById("delivery_fname").value,
+				"last_name": document.getElementById("delivery_lname").value,
+				"address": document.getElementById("delivery_address").value,
+				"latlng": {
+					"lat": delivery_location.lat,
+					"lng": delivery_location.lng
 				},
 				"date": document.getElementById("delivery_date").value
 			},
-			"package_info": {
-				"size": document.getElementById("size").value,
-				"weight": document.getElementById("weight").value
-			}			
+			"size": document.getElementById("size").value,
+			"weight": document.getElementById("weight").value		
 		};
 		
 		console.log(JSON.stringify(data));
 		
-		fetch('https://localhost:44327/api/Packages', {
+		fetch('https://localhost:44329/api/Packages', {
 			method: 'POST',
 			headers: {
 			'Content-Type': 'application/json',
