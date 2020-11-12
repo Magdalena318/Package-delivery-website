@@ -14,8 +14,7 @@ namespace Back_end.Models
 
     public class EndpointDetails
     {
-        public string first_name { get; set; }
-        public string last_name { get; set; }
+        public string name { get; set; }
         public string address { get; set; }
 
         public LatLng latlng { get; set; }
