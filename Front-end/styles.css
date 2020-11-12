@@ -34,6 +34,19 @@ body
 	width: 100%;
 }
 
+span{
+	/* background-color: #6a1cbd; */
+	width: 2rem;
+	height: 2rem;
+	display: block;
+	left: -1.5rem;
+	top: -1.5rem;
+	position: relative;
+	border-radius: 2rem 2rem 0;
+	transform: rotate(45deg);
+	border: 1px solid #FFFFFF`;
+}
+
 /* Forms */
 form{
 	margin: 0 auto;

@@ -70,8 +70,6 @@ window.onload = function load(){
 			})
 				.then(response => response.json())
 				.then(data => {
-					console.log('Success:', data);
-					
 					//Hide other forms
 					document.getElementById("package_number_form").style.display = "none";
 					document.getElementById("sender_details").style.display = "none";
@@ -95,28 +93,15 @@ window.onload = function load(){
 	}).addTo(lookup_map);
 	var markers_layer = L.layerGroup().addTo(lookup_map);
 	
-	//Marker styles
-	var myCustomColour = '#583470';
-
-	const markerHtmlStyles = `
-	  background-color: ${myCustomColour};
-	  width: 1rem;
-	  height: 1rem;
-	  display: block;
-	  left: -1.5rem;
-	  top: -1.5rem;
-	  position: relative;
-	  border-radius: 1rem 1rem 0;
-	  transform: rotate(45deg);
-	  border: 1px solid #FFFFFF`;
-
-	const icon = L.divIcon({
-	  className: "my-custom-pin",
-	  iconAnchor: [0, 24],
-	  labelAnchor: [-6, 0],
-	  popupAnchor: [0, -36],
-	  html: `<span style="${markerHtmlStyles}" />`
-	})
+	//Generate random color for a set of markers
+	function getRandomColor() {
+		var letters = '0123456789ABCDEF';
+		var color = '#';
+		for (var i = 0; i < 6; i++) {
+			color += letters[Math.floor(Math.random() * 16)];
+		}
+		return color;
+	}
 		
 	
 	//Displaying the info on the map
@@ -137,30 +122,42 @@ window.onload = function load(){
 				//Adding markers and listeners
 				markers_layer.clearLayers();
 				for(var i = 0;  i < data.length; i++){	
+					//Closure function to display current data
 					var cur_data = data[i];
-					console.log(i);
+					function display(cur_data){						
+						return function(){
+							display_json(cur_data);
+						}
+					};
 					
+					//Generate random color
+					var cur_color = getRandomColor();
+					
+					var icon = L.divIcon({
+						className: "my-custom-pin",
+						iconAnchor: [0, 24],
+						labelAnchor: [-6, 0],
+						popupAnchor: [0, -36],
+						html: `<span style="background-color:${cur_color};" />`
+					});
+									
+					//Create pickup marker
 					var cur_pickup_lat = Number(cur_data.pickup_details.latlng.lat);
 					var cur_pickup_lng = Number(cur_data.pickup_details.latlng.lng);					
 					var cur_pickup_latlng = L.latLng(cur_pickup_lat, cur_pickup_lng);
 					var cur_pickup_marker = L.marker(cur_pickup_latlng, {icon: icon, title: "pickup: " + cur_data.id}).addTo(markers_layer);
-					console.log(markers_layer.getLayers().length);
-					console.log(cur_pickup_latlng);
-					// cur_pickup_marker.on('click', function(){					
-						// var parts = this.options.title.split(: );
-						// const found = array1.find(element => element > 10);
-						// display_json(cur_data);						
-					// });
+
+					cur_pickup_marker.on('click', display(cur_data));
 					
+					//Create delivery marker
 					var cur_delivery_lat = Number(cur_data.delivery_details.latlng.lat);
 					var cur_delivery_lng = Number(cur_data.delivery_details.latlng.lng);					
 					var cur_delivery_latlng = L.latLng(cur_delivery_lat, cur_delivery_lng);
 					var cur_delivery_marker = L.marker(cur_delivery_latlng, {icon: icon, title: "delivery: " + cur_data.id}).addTo(markers_layer);		
-					console.log(markers_layer.getLayers().length);	
-					console.log(cur_delivery_latlng);
-					// // cur_delivery_marker.on('click', function(){					
-						// // display_json(cur_data);						
-					// // });
+
+					cur_delivery_marker.on('click', display(cur_data));
+					
+					//Tiles updating
 					lookup_map.invalidateSize();
 				}				
 				console.log(markers_layer.getLayers().length);
