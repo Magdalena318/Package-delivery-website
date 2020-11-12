@@ -1,6 +1,6 @@
 window.onload = function load(){
 	
-/************************************************************************** LOOK UP PACKAGE **********************************************************************************/
+/***************************************************** LOOK UP PACKAGE *****************************************************************/
 	
 	//Filling out "display_package_form" from the passed json
 	function display_json(data){
@@ -153,9 +153,15 @@ window.onload = function load(){
 					var cur_delivery_lat = Number(cur_data.delivery_details.latlng.lat);
 					var cur_delivery_lng = Number(cur_data.delivery_details.latlng.lng);					
 					var cur_delivery_latlng = L.latLng(cur_delivery_lat, cur_delivery_lng);
-					var cur_delivery_marker = L.marker(cur_delivery_latlng, {icon: icon, title: "delivery: " + cur_data.id}).addTo(markers_layer);		
+					var cur_delivery_marker = L.marker(cur_delivery_latlng, {icon: icon, title: "delivery: " + cur_data.id}).addTo(markers_layer);	
 
 					cur_delivery_marker.on('click', display(cur_data));
+					
+					//Draw a line between markers
+					var latlngs = Array();
+					latlngs.push(cur_pickup_latlng);
+					latlngs.push(cur_delivery_latlng);
+					var polyline = L.polyline(latlngs, {color: cur_color}).addTo(lookup_map);
 					
 					//Tiles updating
 					lookup_map.invalidateSize();
@@ -163,14 +169,8 @@ window.onload = function load(){
 				console.log(markers_layer.getLayers().length);
 			})
 	}
-	
-	// function Marker_display(){					
-		// var parts = this.options.title.split(: );
-		// const found = array1.find(element => element > 10);
-		// display_json(cur_data);						
-	// });
 		 
-/************************************************************************** OPEN/CLOSE FORMS **********************************************************************************/
+/********************************************************* OPEN/CLOSE FORMS ****************************************************************/
 	
 	//Looking up a package by number
 	document.getElementById("lookup_button_open_form").onclick = function Open_package_number(){
@@ -241,7 +241,7 @@ window.onload = function load(){
 	document.getElementById("all_lookup_homepage").addEventListener("click", ReturnHome);
 
 
-	/************************************************************************** SEND PACKAGE PART***********************************************************************************/
+	/*************************************************** SEND PACKAGE PART*************************************************************/
 	
 	//Map for Pickup
 	var pickup_map = L.map('pickup_location').setView([52.2297, 21.0122], 13);
