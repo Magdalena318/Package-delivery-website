@@ -1,28 +1,29 @@
-﻿using Back_end.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Back_end.Models;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
+
 namespace Back_end.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class PackagesController : ApiController
+    public class VehiclesController : ApiController
     {
 
-        // GET: api/Packages
+        // GET: api/Vehicles
         public IHttpActionResult Get()
         {
-            return Ok(Database.GetPackages());
+            return Ok(Database.GetVehicles());
         }
 
-        // GET: api/Packages/5
+        // GET: api/Vehicles/5
         public IHttpActionResult Get(int id)
         {
-            Package requested = Database.FindPackage(id);
+            Vehicle requested = Database.FindVehicle(id);
             if (requested == null)
             {
                 return NotFound();
@@ -31,26 +32,17 @@ namespace Back_end.Controllers
             return Ok(requested);
         }
 
-        // POST: api/Packages
-        public IHttpActionResult Post([FromBody]Package p)
+        // POST: api/Vehicles
+        public void Post([FromBody]string value)
         {
-            if (p == null)
-            {
-                return NotFound();
-            }
-
-            int new_id = Database.NextId();
-            p.id = new_id;
-            Database.AddNewPackage(p);
-            return Ok(new_id);
         }
 
-        // PUT: api/Packages/5
+        // PUT: api/Vehicles/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Packages/5
+        // DELETE: api/Vehicles/5
         public void Delete(int id)
         {
         }
