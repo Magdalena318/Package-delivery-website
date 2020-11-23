@@ -13,15 +13,21 @@ namespace Back_endNew.Models
 
     public class Vehicle
     {
-        static LatLng depot = new LatLng(0.39870315600007, -99.41461918999994);
-
+        public LatLng depot { get; set; }
         public int id { get; set; }
         public double capacity { get; set; }
         public double occupied { get; set; }
         List<Package> packages { get; set; }
         List<Endpoint> route { get; set; }
 
-
+        public Vehicle(int _id, double _capacity, LatLng _depot) {
+            id = _id;
+            capacity = _capacity;
+            depot = _depot;
+            occupied = 0;
+            packages = new List<Package>();
+            route = new List<Endpoint>();
+        }
 
         public bool AddPackage(Package p)
         {

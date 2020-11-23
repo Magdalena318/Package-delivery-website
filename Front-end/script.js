@@ -54,6 +54,26 @@ window.onload = function load(){
 	}).addTo(delivery_map);
 	var delivery_marker = L.layerGroup().addTo(delivery_map);
 	var delivery_location;
+	
+	//Map for choosing depot location
+	var depot_map = L.map('depot_location').setView([39.39870315600007, -99.41461918999994], 3);	
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+		maxZoom: 18,
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1,
+		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
+	}).addTo(depot_map);
+	var depot_marker = L.layerGroup().addTo(depot_map);
+	var depot_location;
+	
+	function onDepotMapClick(e){
+		depot_marker.clearLayers();		
+		var marker = L.marker(e.latlng, {icon: default_icon}).addTo(depot_marker);
+		depot_location = e.latlng;
+		depot_map.setView(e.latlng, 13);		
+	}
+	depot_map.on('click', onDepotMapClick);
 
 	//Default color icon for markers
 	var default_icon = L.divIcon({
@@ -81,7 +101,7 @@ window.onload = function load(){
 	var geocoder = L.esri.Geocoding.geocodeService();
 	
 	//Refresh map with new address
-	document.getElementById("pickup_refresh").onclick = function Pickup_refresh(){
+	document.getElementById("pickup_refresh").onclick = function(){
 		var pickup_address = document.getElementById("pickup_address").value;
 
 		if(pickup_address != null && pickup_address != ""){
@@ -105,19 +125,16 @@ window.onload = function load(){
 	
 	//Reverse geocoding pickup	
 	function onPickupMapClick(e) {
-		console.log("check");
 		pickup_marker.clearLayers();
 		
 		var marker = L.marker(e.latlng, {icon: default_icon}).addTo(pickup_marker);
 		pickup_location = e.latlng;
 		pickup_map.setView(e.latlng, 13);
-		console.log(e.latlng);
 		
 		geocoder.reverse().latlng(e.latlng).run(function (error, result) {
 			if (error) {
 				return;
 			}
-			console.log(result);
 			document.getElementById("pickup_address").value = result.address.LongLabel;	
 		});
 	}
@@ -166,6 +183,26 @@ window.onload = function load(){
 	delivery_map.on('click', onDeliveryMapClick);
 	
 	/*********************************************** OPEN/CLOSE FORMS ****************************************************/
+	//Returning to the homepage
+	function ReturnHome(){
+		document.getElementById("type_form").style.display = "block";
+
+		document.getElementById("sender_details").style.display = "none";
+		document.getElementById("receiver_details").style.display = "none";
+		document.getElementById("package_details").style.display = "none";
+		document.getElementById("package_submitted").style.display = "none";
+		
+		document.getElementById("package_number_form").style.display = "none";
+		document.getElementById("display_package_form").style.display = "none";
+		document.getElementById("map_locations").style.display = "none";
+		
+		document.getElementById("vehicle_number_form").style.display = "none";
+		document.getElementById("vehicle_details").style.display = "none";
+	}
+	document.getElementById("lookup_homepage").addEventListener("click", ReturnHome);
+	document.getElementById("submitted_homepage").addEventListener("click", ReturnHome);
+	document.getElementById("all_lookup_homepage").addEventListener("click", ReturnHome);
+	document.getElementById("vehicle_submitted_homepage").addEventListener("click", ReturnHome);
 	
 	//Looking up a package by number
 	document.getElementById("lookup_button_open_form").onclick = function(){
@@ -182,7 +219,6 @@ window.onload = function load(){
 	//Open send package form
 	document.getElementById("send_button").onclick = function(){
 		document.getElementById("type_form").style.display = "none";
-		document.getElementById("package_number_form").style.display = "none";
 		document.getElementById("sender_details").style.display = "grid";
 		pickup_map.invalidateSize();
 	}
@@ -225,21 +261,12 @@ window.onload = function load(){
 		}
 	}
 	
-	//Returning to the homepage
-	function ReturnHome(){
-		document.getElementById("package_number_form").style.display = "none";
-		document.getElementById("sender_details").style.display = "none";
-		document.getElementById("receiver_details").style.display = "none";
-		document.getElementById("package_details").style.display = "none";
-		document.getElementById("display_package_form").style.display = "none";
-		document.getElementById("package_submitted").style.display = "none";
-		document.getElementById("type_form").style.display = "block";
-		document.getElementById("map_locations").style.display = "none";
-		document.getElementById("vehicle_number_form").style.display = "none";
+	//Open add vehicle form
+	document.getElementById("add_vehicle_button").onclick = function(){
+		document.getElementById("type_form").style.display = "none";
+		document.getElementById("vehicle_details").style.display = "grid";
+		depot_map.invalidateSize();
 	}
-	document.getElementById("lookup_homepage").addEventListener("click", ReturnHome);
-	document.getElementById("submitted_homepage").addEventListener("click", ReturnHome);
-	document.getElementById("all_lookup_homepage").addEventListener("click", ReturnHome);
 
 
 /******************************************** LOOK UP PACKAGE *****************************************************/
@@ -374,40 +401,9 @@ window.onload = function load(){
 	}
 
 /************************************************* LOOK UP ROUTES **********************************************************/
-		//Filling out "display_package_form" from the passed json
+	//Filling out "display_package_form" from the passed json
 	function display_route(data){
-		// //Displaying package info
-		// document.getElementById("display_package_id").innerText = data.id;
-		// document.getElementById("display_size").innerText = data.size;
-		// document.getElementById("display_weight").innerText = data.weight;
-		
-		// //Displaying pickup details
-		// document.getElementById("display_pickup_name").innerText = data.pickup_details.name;
-		// document.getElementById("display_pickup_address").innerText = data.pickup_details.address;
-		// document.getElementById("display_pickup_date").innerText = data.pickup_details.date;
-		
-		// var display_pickup_lat = Number(data.pickup_details.latlng.lat);
-		// var display_pickup_lng = Number(data.pickup_details.latlng.lng);
-		// var display_pickup_latlng = L.latLng(display_pickup_lat, display_pickup_lng);
-		
-		// display_pickup_map.setView(display_pickup_latlng, 13);
-		// var display_pickup_markers = L.layerGroup().addTo(display_pickup_map);
-		// var display_pickup_marker = L.marker(display_pickup_latlng, {icon: default_icon}).addTo(display_pickup_markers);
-		
-		// //Displaying delivery details
-		// document.getElementById("display_delivery_name").innerText = data.delivery_details.name;
-		// document.getElementById("display_delivery_address").innerText = data.delivery_details.address;
-		// document.getElementById("display_delivery_date").innerText = data.delivery_details.date;
-		
-		// var display_delivery_lat = Number(data.delivery_details.latlng.lat);
-		// var display_delivery_lng = Number(data.delivery_details.latlng.lng);
-		// var display_delivery_latlng = L.latLng(display_delivery_lat, display_delivery_lng);
-		
-		// display_delivery_map.setView(display_delivery_latlng, 13);
-		// var display_delivery_markers = L.layerGroup().addTo(display_delivery_map);
-		// var display_delivery_marker = L.marker(display_delivery_latlng, {icon: default_icon}).addTo(display_delivery_markers);
-		
-		// display_package_form.style.display = "grid";
+
 	}
 	
 	//Look up route by number
@@ -433,7 +429,7 @@ window.onload = function load(){
 	}
 		 
 
-/***************************************************SEND PACKAGE*************************************************************/					
+/***************************************************SUBMITTING*************************************************************/					
 	//Send the package data to the server
 	document.getElementById("submit_package").onclick = function Send_package_data(){
 		//Constructing JSON		
@@ -484,6 +480,38 @@ window.onload = function load(){
 		  console.error('Error:', error);
 		});
 	}
+	
+	//Send the vehicle data to the server
+	document.getElementById("submit_vehicle").onclick = function(){
+		//Constructing JSON		
+		const data = { 
+			"capacity": document.getElementById("capacity").value,
+			"lat": depot_location.lat,
+			"lng": depot_location.lng
+		};
+		
+		console.log(JSON.stringify(data));
+		
+		fetch('https://localhost:44306/api/Vehicles', {
+			method: 'POST',
+			headers: {
+			'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+			.then(response => response.json())
+			.then(data => {
+				console.log('Success:', data.toString());
+				document.getElementById("vehicle_details").style.display = "none";
+				document.getElementById("vehicle_submitted").style.display = "grid";
+			
+				document.getElementById("vehicle_success").textContent = document.getElementById("vehicle_success").textContent + data;
+		})
+		.catch((error) => {
+		  console.error('Error:', error);
+		});
+	}
+	
 } 
 
 

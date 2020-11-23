@@ -59,44 +59,17 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		<br>
 		
 		<img id="package_logo" src="package_logo.png" alt="Package logo" >
-		<br><br>
-		<input id="send_button" type="button" value="Send a new package" />
-		<input id="lookup_button_open_form" type="button" value="Look up a package by number" />
-		<input id="lookup_button_all" type="button" value="Look up a package on map" />
-		<input id="lookup_route" type="button" value="Look up a route by vehicle" />
-		<input id="lookup_all_routes" type="button" value="Look up all routes" />
+		<br>
+		<input id="send_button" type="button" class="main_page_button" value="Send a new package" />
+		<input id="lookup_button_open_form" type="button" class="main_page_button" value="Look up a package by number" />
+		<input id="lookup_button_all" type="button" class="main_page_button" value="Look up a package on map" />
+		<input id="add_vehicle_button" type="button" class="main_page_button" value="Add a new vehicle" />
+		<input id="lookup_route" type="button" class="main_page_button" value="Look up vehicle's route by number" />
 
 	</div>
 	
-	<!-- Provide the package number -->
-	<form id="package_number_form">
-		<div class="header">
-			<h1> PACKAGE DELIVERY SERVICE</h1>
-		</div>
-	
-		<br>
-		
-		<label class="label" for="package_number">Package number:</label>
-		<input class="input" type="number" id="package_number" name="package_number" required><br><br>
-		
-		<input id="lookup_button" type="button" value="Look up a package" />
-	</form>
-	
-	<form id="vehicle_number_form">
-		<div class="header">
-			<h1> PACKAGE DELIVERY SERVICE</h1>
-		</div>
-	
-		<br>
-		
-		<label class="label" for="vehicle_number">Vehicle number:</label>
-		<input class="input" type="number" id="vehicle_number" name="vehicle_number" required><br><br>
-		
-		<input id="lookup_route_button" type="button" value="Look up a route" />
-	</form>
-	
 	<!-- First form: sender details -->
-	<form id="sender_details">
+	<form id="sender_details" class="hidden_form">
 		
 		<div class="subheader">
 		<h2> Sender Details</h2>
@@ -121,7 +94,7 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 
 	</form>
 	<!-- Second form: receiver details -->
-	<form id="receiver_details">
+	<form id="receiver_details" class="hidden_form">
 	
 		<br>
 		
@@ -149,7 +122,7 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 	</form>
 	
 	<!-- Third form: Package details -->
-	<form id="package_details">
+	<form id="package_details" class="hidden_form">
 	
 		<br>
 		
@@ -167,15 +140,40 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		   <option value="10">less than 300</option>
 		</select><br><br>
 		
-		<label class="label"for="weight">Weight:</label>
+		<label class="label"for="weight">Weight (in kg):</label>
 		<input class="input" type="number" id="weight" name="weight" required><br><br>
 		
 		<input id="submit_package" type="button" value="Submit">
 		<br><br>
 	</form>
 	
+	<!-- Displaying info for successful package submission -->
+	<form id="package_submitted" class="hidden_form">
+		<div class="header">
+			<h1> PACKAGE DELIVERY SERVICE</h1>
+		</div>
+		<p id="success">
+		Package has been submitted successfully! Package number is 
+		</p>
+		<input class="homepage" id="submitted_homepage" type="button" value="Go to the homepage">
+	</form>
+	
+	<!-- Provide the package number -->
+	<form id="package_number_form" class="hidden_form">
+		<div class="header">
+			<h1> PACKAGE DELIVERY SERVICE</h1>
+		</div>
+	
+		<br>
+		
+		<label class="label" for="package_number">Package number:</label>
+		<input class="input" type="number" id="package_number" name="package_number" required><br><br>
+		
+		<input id="lookup_button" type="button" value="Look up a package" />
+	</form>
+	
 	<!-- Looking up packages on the map -->
-	<div id="map_locations">
+	<div id="map_locations" class="hidden_form">
 		<div class="header">
 			<h1> PACKAGE DELIVERY LOCATIONS</h1>
 		</div>
@@ -185,9 +183,10 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		<input class="homepage" id="all_lookup_homepage" type="button" value="Go to the homepage">
 		
 	</div>
-	<br>
+	
+	
 	<!-- Displaying info for lookup -->
-	<form id="display_package_form">
+	<form id="display_package_form" class="hidden_form">
 		<!-- Displaying package info -->
 		<div class="subheader">
 		  <h2>Package details</h2>
@@ -248,17 +247,49 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		
 	</form>
 	
-	<!-- Displaying info for successful package submission -->
-	<form id="package_submitted">
+	<!-- Adding vehicles -->
+	<form id="vehicle_number_form" class="hidden_form">
 		<div class="header">
 			<h1> PACKAGE DELIVERY SERVICE</h1>
 		</div>
-		<p id="success">
-		Package has been submitted successfully! Package number is 
-		</p>
-		<input class="homepage" id="submitted_homepage" type="button" value="Go to the homepage">
+	
+		<br>
+		
+		<label class="label" for="vehicle_number">Vehicle number:</label>
+		<input class="input" type="number" id="vehicle_number" name="vehicle_number" required><br><br>
+		
+		<input id="lookup_route_button" type="button" value="Look up a route" />
 	</form>
 	
+	<!-- Vehicle details -->
+	<form id="vehicle_details" class="hidden_form">
+
+		<div class="subheader">
+		  <h2>Vehicle details</h2>
+		</div>
+
+		<br>
+		
+		<label class="label" for="capacity">Capacity (in kg):</label>
+		<input class="input" type="number" id="capacity" name="capacity" required><br><br>
+		
+		<label class="label" for="depot_location">Depot location:</label>
+		<div class = "map" id="depot_location" required></div><br><br>
+		
+		<input id="submit_vehicle" type="button" value="Submit">
+		<br><br>
+	</form>
+	
+	<!-- Displaying info for successful package submission -->
+	<form id="vehicle_submitted" class="hidden_form">
+		<div class="header">
+			<h1> PACKAGE DELIVERY SERVICE</h1>
+		</div>
+		<p id="vehicle_success">
+		Vehicle has been submitted successfully! Vehicle number is 
+		</p>
+		<input class="homepage" id="vehicle_submitted_homepage" type="button" value="Go to the homepage">
+	</form>
 
 	</body>	
 </html>

@@ -32,8 +32,17 @@ namespace Back_endNew.Controllers
         }
 
         // POST: api/Vehicles
-        public void Post([FromBody] string value)
+        public IHttpActionResult Post([FromBody] VehicleSubmit v)
         {
+            if (v == null)
+            {
+                return NotFound();
+            }
+
+            int new_id = Database.NextVehicleId();
+            Vehicle new_vehicle = new Vehicle(new_id, Convert.ToDouble(v.capacity), new LatLng(Convert.ToDouble(v.lat), Convert.ToDouble(v.lng)));
+            Database.AddNewVehicle(new_vehicle);
+            return Ok(new_id);
         }
 
         // PUT: api/Vehicles/5

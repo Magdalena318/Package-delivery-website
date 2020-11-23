@@ -13,6 +13,8 @@ namespace Back_endNew.Models
         static List<Vehicle> vehicles { get; set; }
         static private int last_package_id { get; set; }
 
+        static private int last_vehicle_id { get; set; }
+
         static Database()
         {
             packages = new List<Package>();
@@ -53,6 +55,9 @@ namespace Back_endNew.Models
 
                     AddNewPackage(p);
                 }
+
+                vehicles = new List<Vehicle>();
+                last_vehicle_id = 0;
             }
         }
 
@@ -66,15 +71,26 @@ namespace Back_endNew.Models
             return vehicles.Find(p => p.id == id);
         }
 
-        public static int NextId()
+        public static int NextPackageId()
         {
             last_package_id++;
             return last_package_id;
         }
 
+        public static int NextVehicleId()
+        {
+            last_vehicle_id++;
+            return last_vehicle_id;
+        }
+
         public static void AddNewPackage(Package p)
         {
             packages.Add(p);
+        }
+
+        public static void AddNewVehicle(Vehicle v)
+        {
+            vehicles.Add(v);
         }
 
         public static List<Package> GetPackages()

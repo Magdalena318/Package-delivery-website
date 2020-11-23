@@ -172,6 +172,7 @@
     <Compile Include="Models\EndpointDetails.cs" />
     <Compile Include="Models\Package.cs" />
     <Compile Include="Models\Vehicle.cs" />
+    <Compile Include="Models\VehicleSubmit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

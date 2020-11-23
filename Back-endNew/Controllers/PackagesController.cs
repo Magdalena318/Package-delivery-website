@@ -41,7 +41,7 @@ namespace Back_endNew.Controllers
                 return NotFound();
             }
 
-            int new_id = Database.NextId();
+            int new_id = Database.NextPackageId();
             p.id = new_id;
             Database.AddNewPackage(p);
             return Ok(new_id);

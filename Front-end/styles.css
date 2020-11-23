@@ -11,7 +11,7 @@ body
 	width: 600px;
 }
 
-#send_button, #lookup_button_all, #lookup_button_open_form, #lookup_route, #lookup_all_routes{
+.main_page_button{
 	width: 275px;
 	display: block;
 	align: left;
@@ -112,6 +112,6 @@ p{
 }
 
 /* Hiding forms */
-#package_number_form, #sender_details, #receiver_details, #package_details, #display_package_form, #package_submitted , #map_locations, #vehicle_number_form{
+.hidden_form{
 	display: none;
 }
