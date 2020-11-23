@@ -1,6 +1,39 @@
 window.onload = function load(){
+
+/*****************************************************MAPS*****************************************************************/
+	//Maps for displaying pickup and delivery points
+	var display_pickup_map = L.map("display_pickup_location");
 	
-/***************************************************** LOOK UP PACKAGE *****************************************************************/
+	var display_delivery_map = L.map("display_delivery_location");
+	
+	//Looking up a package on a map	
+	var lookup_map = L.map('all_packages_map');
+	var markers_layer = L.layerGroup().addTo(lookup_map);
+	
+	//Map for Pickup
+	var pickup_map = L.map('pickup_location');
+	//pickup_map.setView([39.39870315600007, -99.41461918999994], 3);
+	var corner1 = L.latLng(40.712, -74.227),
+	corner2 = L.latLng(40.774, -74.125),
+	bounds = L.latLngBounds(corner1, corner2);
+	pickup_map.fitBounds(bounds);
+	var pickup_marker = L.layerGroup().addTo(pickup_map);
+	var pickup_location;
+	
+	//Map for Delivery
+	var delivery_map = L.map('delivery_location');
+	delivery_map.setView([39.39870315600007, -99.41461918999994], 3);	
+	var delivery_marker = L.layerGroup().addTo(delivery_map);
+	var delivery_location;
+	
+	//Tiles
+	var tile = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {
+		foo: 'bar', }).addTo(pickup_map);
+	tile.addTo(display_pickup_map);
+	tile.addTo(display_delivery_map);
+	tile.addTo(lookup_map);
+	tile.addTo(pickup_map);
+	tile.addTo(delivery_map);
 	
 	//Default color icon for markers
 	var default_icon = L.divIcon({
@@ -10,25 +43,108 @@ window.onload = function load(){
 		popupAnchor: [0, -36],
 		html: `<span/>`
 	});
-					
-	//Maps for displaying pickup and delivery points
-	var display_pickup_map = L.map("display_pickup_location");
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-		maxZoom: 18,
-		id: 'mapbox/streets-v11',
-		tileSize: 512,
-		zoomOffset: -1,
-		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
-	}).addTo(display_pickup_map);
 	
-	var display_delivery_map = L.map("display_delivery_location");
-		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-		maxZoom: 18,
-		id: 'mapbox/streets-v11',
-		tileSize: 512,
-		zoomOffset: -1,
-		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
-	}).addTo(display_delivery_map);
+	//Generate random color for a set of markers
+	function getRandomColor() {
+		var letters = '0123456789ABCDEF';
+		var color = '#';
+		for (var i = 0; i < 6; i++) {
+			color += letters[Math.floor(Math.random() * 16)];
+		}
+		return color;
+	}
+	
+
+/*****************************************************GEOCODING*************************************************************/	
+		
+	//Geocoding pickup
+	var geocoder = L.esri.Geocoding.geocodeService();
+	
+	//Refresh map with new address
+	document.getElementById("pickup_refresh").onclick = function Pickup_refresh(){
+		var pickup_address = document.getElementById("pickup_address").value;
+
+		if(pickup_address != null && pickup_address != ""){
+			L.esri.Geocoding.geocode().text(pickup_address).run(function (error, response) {
+				if (error) {
+					console.log(err);
+					window.alert("The provided address can not be found!");
+					return;
+				}
+				
+				var latlng = response.results[0].latlng;
+				pickup_map.setView(latlng, 13)
+				pickup_marker.clearLayers();
+				var marker = L.marker(latlng, {icon: default_icon}).addTo(pickup_marker);
+				pickup_location = latlng;
+			});
+			
+		}
+
+	}
+	
+	
+	//Reverse geocoding pickup	
+	function onPickupMapClick(e) {
+		pickup_marker.clearLayers();
+		
+		var marker = L.marker(e.latlng, {icon: default_icon}).addTo(pickup_marker);
+		pickup_location = e.latlng;
+		pickup_map.setView(e.latlng, 13);
+		
+		geocoder.reverse().latlng(e.latlng).run(function (error, result) {
+			if (error) {
+				return;
+			}
+			document.getElementById("pickup_address").value = result.address.LongLabel;	
+		});
+	}
+
+	pickup_map.on('click', onPickupMapClick);
+	
+	//Geocoding delivery
+	document.getElementById("delivery_refresh").onclick = function Delivery_refresh(){
+		var delivery_address = document.getElementById("delivery_address").value;
+		
+		//Creating address string
+		if(delivery_address != null && delivery_address != ""){
+			L.esri.Geocoding.geocode().text(delivery_address).run(function (error, response) {
+				if (error) {
+					console.log(err);				
+					window.alert("The provided address can not be found!");
+					return;
+				}
+				console.log(response.results[0].latlng);
+				
+				var latlng = response.results[0].latlng;
+				delivery_map.setView(latlng, 13)
+				delivery_marker.clearLayers();
+				var marker = L.marker(latlng, {icon: default_icon}).addTo(delivery_marker);
+				delivery_location = latlng;
+			});
+			
+		}
+	}
+	
+	//Reverse geocoding delivery
+	function onDeliveryMapClick(e) {
+		delivery_marker.clearLayers();
+		
+		var marker = L.marker(e.latlng, {icon: default_icon}).addTo(delivery_marker);
+		delivery_location = e.latlng;
+		delivery_map.setView(e.latlng, 13);
+		
+		geocoder.reverse().latlng(e.latlng).run(function (error, result) {
+			if (error) {
+				return;
+			}
+			
+			document.getElementById("delivery_address").value = result.address.LongLabel;	
+		});
+	}
+	delivery_map.on('click', onDeliveryMapClick);
+
+/***************************************************** LOOK UP PACKAGE *****************************************************************/
 
 	//Filling out "display_package_form" from the passed json
 	function display_json(data){
@@ -74,7 +190,7 @@ window.onload = function load(){
 			return;
 		} else {	
 			//Sending GET request
-			var address = 'https://localhost:44329/api/Packages/'  + package_number.toString();
+			var address = 'https://localhost:44306/api/Packages/'  + package_number.toString();
 			fetch(address, {
 				method: 'GET',
 			})
@@ -90,34 +206,12 @@ window.onload = function load(){
 				})
 		}
 	}
-	
-	//Looking up a package on a map
-	
-	var lookup_map = L.map('all_packages_map').setView([0.0, 50], 1);
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-		maxZoom: 18,
-		id: 'mapbox/streets-v11',
-		tileSize: 512,
-		zoomOffset: -1,
-		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
-	}).addTo(lookup_map);
-	var markers_layer = L.layerGroup().addTo(lookup_map);
-	
-	//Generate random color for a set of markers
-	function getRandomColor() {
-		var letters = '0123456789ABCDEF';
-		var color = '#';
-		for (var i = 0; i < 6; i++) {
-			color += letters[Math.floor(Math.random() * 16)];
-		}
-		return color;
-	}
 		
 	
 	//Displaying the info on the map
 	document.getElementById("lookup_button_all").onclick = function Lookup_packages_map(){
 		//Sending GET request
-		var address = 'https://localhost:44329/api/Packages/';
+		var address = 'https://localhost:44306/api/Packages/';
 		fetch(address, {
 			method: 'GET',
 		})
@@ -180,7 +274,7 @@ window.onload = function load(){
 			})
 	}
 		 
-/********************************************************* OPEN/CLOSE FORMS ****************************************************************/
+/*********************************************** OPEN/CLOSE FORMS ****************************************************/
 	
 	//Looking up a package by number
 	document.getElementById("lookup_button_open_form").onclick = function Open_package_number(){
@@ -247,129 +341,7 @@ window.onload = function load(){
 	document.getElementById("all_lookup_homepage").addEventListener("click", ReturnHome);
 
 
-	/*************************************************** SEND PACKAGE PART*************************************************************/
-	
-	//Map for Pickup
-	var pickup_map = L.map('pickup_location').setView([52.2297, 21.0122], 13);
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-		maxZoom: 18,
-		id: 'mapbox/streets-v11',
-		tileSize: 512,
-		zoomOffset: -1,
-		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
-	}).addTo(pickup_map);
-	var pickup_marker = L.layerGroup().addTo(pickup_map);
-	var pickup_location;
-	pickup_map.invalidateSize();
-	
-	
-	//Geocoding pickup
-	var geocoder = L.esri.Geocoding.geocodeService();
-	
-	//Refresh map with new address
-	document.getElementById("pickup_refresh").onclick = function Pickup_refresh(){
-		var pickup_address = document.getElementById("pickup_address").value;
-
-		if(pickup_address != null && pickup_address != ""){
-			L.esri.Geocoding.geocode().text(pickup_address).run(function (error, response) {
-				if (error) {
-					console.log(err);
-					window.alert("The provided address can not be found!");
-					return;
-				}
-				
-				var latlng = response.results[0].latlng;
-				pickup_map.setView(latlng, 13)
-				pickup_marker.clearLayers();
-				var marker = L.marker(latlng, {icon: default_icon}).addTo(pickup_marker);
-				pickup_map.invalidateSize();
-				pickup_location = latlng;
-			});
-			
-		}
-
-	}
-	
-	
-	//Reverse geocoding pickup
-	var geocodeService = L.esri.Geocoding.geocodeService();
-	
-	function onPickupMapClick(e) {
-		pickup_marker.clearLayers();
-		
-		var marker = L.marker(e.latlng, {icon: default_icon}).addTo(pickup_marker);
-		pickup_location = e.latlng;
-		pickup_map.invalidateSize();
-		
-		geocodeService.reverse().latlng(e.latlng).run(function (error, result) {
-			if (error) {
-				return;
-			}
-			document.getElementById("pickup_address").value = result.address.LongLabel;	
-		});
-	}
-
-	pickup_map.on('click', onPickupMapClick);
-	
-	//Map for Delivery
-	var delivery_map = L.map('delivery_location').setView([52.2297, 21.0122], 13);
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-		maxZoom: 18,
-		id: 'mapbox/streets-v11',
-		tileSize: 512,
-		zoomOffset: -1,
-		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
-	}).addTo(delivery_map);
-	var delivery_marker = L.layerGroup().addTo(delivery_map);
-	var delivery_location;
-	delivery_map.invalidateSize();
-	
-	//Geocoding delivery
-	document.getElementById("delivery_refresh").onclick = function Delivery_refresh(){
-		var delivery_address = document.getElementById("delivery_address").value;
-		
-		//Creating address string
-		if(delivery_address != null && delivery_address != ""){
-			L.esri.Geocoding.geocode().text(delivery_address).run(function (error, response) {
-				if (error) {
-					console.log(err);				
-					window.alert("The provided address can not be found!");
-					return;
-				}
-				console.log(response.results[0].latlng);
-				
-				var latlng = response.results[0].latlng;
-				delivery_map.setView(latlng, 13)
-				delivery_marker.clearLayers();
-				var marker = L.marker(latlng, {icon: default_icon}).addTo(delivery_marker);
-				delivery_map.invalidateSize();
-				delivery_location = latlng;
-			});
-			
-		}
-	}
-
-	
-	//Reverse geocoding delivery
-	function onDeliveryMapClick(e) {
-		delivery_marker.clearLayers();
-		
-		var marker = L.marker(e.latlng, {icon: default_icon}).addTo(delivery_marker);
-		delivery_location = e.latlng;
-		delivery_map.invalidateSize();
-		
-		geocodeService.reverse().latlng(e.latlng).run(function (error, result) {
-			if (error) {
-				return;
-			}
-			
-			document.getElementById("delivery_address").value = result.address.LongLabel;	
-		});
-	}
-	delivery_map.on('click', onDeliveryMapClick);
-	
-			
-			
+/***************************************************SEND PACKAGE*************************************************************/			
 			
 	//Send the package data to the server
 	document.getElementById("submit_package").onclick = function Send_package_data(){
@@ -400,7 +372,7 @@ window.onload = function load(){
 		
 		console.log(JSON.stringify(data));
 		
-		fetch('https://localhost:44329/api/Packages', {
+		fetch('https://localhost:44306/api/Packages', {
 			method: 'POST',
 			headers: {
 			'Content-Type': 'application/json',

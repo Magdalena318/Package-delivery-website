@@ -1,0 +1,101 @@
+﻿package_id;pickup_name;pickup_address;pickup_lat;pickup_lng;pickup_date;delivery_name;delivery_address;delivery_lat;delivery_lng;delivery_date;size;weight
+10000000;Myrle Jain  ;1745 T Street Southeast, Washington, DC;38.867033;-76.979235;11/27/2020;Mary Harvin  ;5461 West Shades Valley Drive, Montgomery, AL;41.697168;-70.189992;11/30/2020;less than 100cm;9.28
+10000001;Claudie Manna  ;6007 Applegate Lane, Louisville, KY;38.867033;-76.979235;11/27/2020;Wanita Cleaves  ;629 Debbie Drive, Nashville, TN;36.1719075;-86.740228;11/29/2020;less than 50cm;6.31
+10000002;Christian Ellman  ;560 Penstock Drive, Grass Valley, CA;38.1343013;-85.6498512;11/28/2020;Julienne Cauthen  ;22572 Toreador Drive, Salinas, CA;36.084563;-94.206082;11/30/2020;less than 10cm;0.96
+10000003;Bethany Dilley  ;150 Carter Street, Manchester, CT;39.213076;-121.077583;11/29/2020;Liane Boner  ;3034 Mica Street, Fayetteville, AR;32.296422;-86.342803;12/1/2020;less than 100cm;6.4
+10000004;Ozella Knepper  ;2721 Lindsay Avenue, Louisville, KY;41.76556;-72.473091;11/30/2020;Jake Level  ;3729 East Mission Boulevard, Fayetteville, AR;36.208114;-86.586212;12/2/2020;less than 10cm;0.74
+10000005;Florence Railsback  ;18 Densmore Drive, Essex, VT;38.263793;-85.700243;12/1/2020;Willard Hollingworth  ;5114 Greentree Drive, Nashville, TN;36.602449;-121.699071;12/3/2020;less than 50cm;4.68
+10000006;Tomasa Kornfeld  ;637 Britannia Drive, Vallejo, CA;44.492953;-73.101883;12/2/2020;Louella Lachowicz  ;3466 Southview Avenue, Montgomery, AL;36.0807929;-94.2066449;12/5/2020;less than 50cm;2.62
+10000007;Nicolle Knabe  ;5601 West Crocus Drive, Glendale, AZ;38.10477;-122.193849;12/3/2020;Celsa Stinson  ;1513 Cathy Street, Savannah, GA;36.0919353;-94.1065422;12/5/2020;less than 50cm;4.03
+10000008;Dorothy Min  ;5403 Illinois Avenue, Nashville, TN;33.6152469;-112.179737;12/4/2020;Elaina Switzer  ;600 West 19th Avenue, Anchorage, AK;36.0618539;-86.738508;12/6/2020;less than 10cm;1.2
+10000009;Maxie River  ;8821 West Myrtle Avenue, Glendale, AZ;36.157077;-86.853827;12/5/2020;Nakisha Lindstedt  ;1208 Elkader Court North, Nashville, TN;32.341227;-86.2846859;12/7/2020;less than 100cm;9.75
+10000010;Alejandro Shipton  ;2203 7th Street Road, Louisville, KY;33.5404296;-112.2488391;12/6/2020;Evangeline Mckean  ;210 Green Road, Manchester, CT;32.067416;-81.125331;12/8/2020;less than 100cm;7.24
+10000011;Jacquelyn Armitage  ;6463 Vrain Street, Arvada, CO;38.218107;-85.779006;12/7/2020;Eleonora Luevano  ;49548 Road 200, O'Neals, CA;61.203115;-149.894107;12/9/2020;less than 10cm;0.91
+10000012;Loise Delsignore  ;87 Horseshoe Drive, West Windsor, VT;39.814056;-105.046913;12/8/2020;Elsa Thielen  ;81 Seaton Place Northwest, Washington, DC;36.080049;-86.601161;12/10/2020;less than 100cm;7.05
+10000013;Jessika Schutte  ;60 Desousa Drive, Manchester, CT;43.4731793;-72.4967532;12/9/2020;Rachel Rathbun  ;1267 Martin Street, Nashville, TN;41.7909099;-72.5119513;12/11/2020;less than 10cm;1.69
+10000014;Stanford Bruder  ;4 Old Colony Way, Yarmouth, MA;41.7409259;-72.5619104;12/10/2020;Anh Miera  ;7431 Candace Way, Louisville, KY;37.153463;-119.648192;12/12/2020;less than 50cm;5.54
+10000015;Zackary Ernst  ;314 South 17th Street, Nashville, TN;41.697168;-70.189992;12/11/2020;Apryl Thurman  ;1407 Walden Court, Crofton, MD;38.9149499;-77.0117026;12/14/2020;less than 100cm;8.15
+10000016;Isela Weimer  ;1649 Timberridge Court, Fayetteville, AR;36.1719075;-86.740228;12/12/2020;Nida Gosselin  ;5906 Milton Avenue, Deale, MD;36.1404897;-86.7695179;12/14/2020;less than 50cm;4.6
+10000017;Hanh Wiesner  ;5461 West Shades Valley Drive, Montgomery, AL;36.084563;-94.206082;12/13/2020;Jamel Randall  ;74 Springfield Street, Agawam, MA;38.142768;-85.7717132;12/15/2020;less than 100cm;7.38
+10000018;Morris Doster  ;629 Debbie Drive, Nashville, TN;32.296422;-86.342803;12/14/2020;Tierra Hertlein  ;2905 Stonebridge Court, Norman, OK;39.019306;-76.660653;12/17/2020;less than 10cm;0.22
+10000019;Keli Kimberlin  ;22572 Toreador Drive, Salinas, CA;36.208114;-86.586212;11/27/2020;Mertie Albarado  ;20930 Todd Valley Road, Foresthill, CA;38.784451;-76.541255;11/30/2020;less than 50cm;2.4
+10000020;Joesph Elsworth  ;3034 Mica Street, Fayetteville, AR;36.602449;-121.699071;11/27/2020;Arnold Fifer  ;5928 West Mauna Loa Lane, Glendale, AZ;42.0894922;-72.6297558;11/30/2020;less than 50cm;2.84
+10000021;Margurite Snook  ;3729 East Mission Boulevard, Fayetteville, AR;36.0807929;-94.2066449;11/28/2020;Marinda Horsman  ;802 Madison Street Northwest, Washington, DC;35.183319;-97.402105;12/1/2020;less than 100cm;9.31
+10000022;Rosario Holder  ;5114 Greentree Drive, Nashville, TN;36.0919353;-94.1065422;11/29/2020;Dorthey Buendia  ;2811 Battery Place Northwest, Washington, DC;38.989466;-120.883108;12/2/2020;less than 50cm;4.12
+10000023;Antonina Primus  ;3466 Southview Avenue, Montgomery, AL;36.0618539;-86.738508;11/30/2020;Ashely Joo  ;210 Lacross Lane, Westmore, VT;33.6204899;-112.18702;12/3/2020;less than 100cm;7.48
+10000024;Nolan Norfleet  ;1513 Cathy Street, Savannah, GA;32.341227;-86.2846859;12/1/2020;Epifania Galeana  ;2010 Rising Hill Drive, Norman, OK;38.9582381;-77.0244287;12/4/2020;less than 50cm;4.61
+10000025;Dalene Porch  ;600 West 19th Avenue, Anchorage, AK;32.067416;-81.125331;12/2/2020;Nakesha Prosperie  ;1745 T Street Southeast, Washington, DC;38.9256252;-77.0982646;12/5/2020;less than 50cm;5.27
+10000026;Marceline Gauger  ;1208 Elkader Court North, Nashville, TN;61.203115;-149.894107;12/3/2020;Latina Wessner  ;6007 Applegate Lane, Louisville, KY;44.771005;-72.048664;12/6/2020;less than 10cm;1.2
+10000027;Tonia Myer  ;210 Green Road, Manchester, CT;36.080049;-86.601161;12/4/2020;Aletha Stutsman  ;560 Penstock Drive, Grass Valley, CA;35.177281;-97.411869;12/7/2020;less than 50cm;3.31
+10000028;Cornelia Herford  ;49548 Road 200, O'Neals, CA;41.7909099;-72.5119513;12/5/2020;Remona Ekdahl  ;150 Carter Street, Manchester, CT;43.9727945;-73.1023187;12/8/2020;less than 50cm;3.12
+10000029;Latina Wilbanks  ;81 Seaton Place Northwest, Washington, DC;37.153463;-119.648192;12/6/2020;Latarsha Sobieski  ;2721 Lindsay Avenue, Louisville, KY;38.867033;-76.979235;12/9/2020;less than 100cm;7.81
+10000030;Ramiro Osterberg  ;1267 Martin Street, Nashville, TN;38.9149499;-77.0117026;12/7/2020;Ja Wray  ;18 Densmore Drive, Essex, VT;38.1343013;-85.6498512;12/10/2020;less than 50cm;3.19
+10000031;Britt Covelli  ;7431 Candace Way, Louisville, KY;36.1404897;-86.7695179;12/8/2020;Jeanetta Kilby  ;637 Britannia Drive, Vallejo, CA;39.213076;-121.077583;12/11/2020;less than 50cm;3.66
+10000032;Richard Schiffman  ;1407 Walden Court, Crofton, MD;38.142768;-85.7717132;12/9/2020;Tilda Czaja  ;8521 Crystal Street, Anchorage, AK;61.143426;-149.94665;12/12/2020;less than 10cm;1.51
+10000033;Candie Carty  ;5906 Milton Avenue, Deale, MD;39.019306;-76.660653;12/10/2020;Adrian Killen  ;1622 Edgar D Nixon Avenue, Montgomery, AL;32.356384;-86.3128909;12/13/2020;less than 100cm;9.84
+10000034;Alyssa Alcon  ;74 Springfield Street, Agawam, MA;38.784451;-76.541255;12/11/2020;Ivana Allinder  ;1608 Gales Street Northeast, Washington, DC;38.8985542;-76.9813444;12/14/2020;less than 100cm;16.99
+10000035;Thurman Olivo  ;2905 Stonebridge Court, Norman, OK;42.0894922;-72.6297558;12/12/2020;Eunice Hempstead  ;122 East Hayes Street, Norman, OK;35.232121;-97.445053;12/15/2020;less than 100cm;18.69
+10000036;Hobert Berrian  ;20930 Todd Valley Road, Foresthill, CA;35.183319;-97.402105;12/13/2020;Beata Cunningham  ;5144 Cattail Court, Fayetteville, AR;36.041153;-94.087419;12/16/2020;less than 50cm;4.87
+10000037;Marth Washer  ;5928 West Mauna Loa Lane, Glendale, AZ;38.989466;-120.883108;12/14/2020;Earline Linsey  ;131 Kent Drive, Manchester, CT;41.803084;-72.492786;12/15/2020;less than 100cm;17.06
+10000038;Anastacia Bratt  ;802 Madison Street Northwest, Washington, DC;33.6204899;-112.18702;11/27/2020;Lane Pontiff  ;2313 Vegas Avenue, Castro Valley, CA;37.689189;-122.076775;11/30/2020;less than 100cm;17.25
+10000039;Franklin Baptist  ;2811 Battery Place Northwest, Washington, DC;38.9582381;-77.0244287;11/27/2020;Celine Arce  ;5420 Sunset Avenue, Panama City Beach, FL;30.145603;-85.755095;11/30/2020;less than 100cm;16.75
+10000040;Jolanda Paille  ;210 Lacross Lane, Westmore, VT;38.9256252;-77.0982646;11/28/2020;Rosette Mire  ;242 North Ash Street, Fruita, CO;39.161544;-108.725378;12/1/2020;less than 50cm;5.68
+10000041;Thad Stickles  ;2010 Rising Hill Drive, Norman, OK;44.771005;-72.048664;11/29/2020;Hulda Burge  ;38676 Greenwich Circle, Fremont, CA;37.562256;-121.976451;12/2/2020;less than 100cm;18.4
+10000042;Jon Sinkler  ;1745 T Street Southeast, Washington, DC;35.177281;-97.411869;11/30/2020;Carry Saylors  ;2426 East Onyx Trail, Fayetteville, AR;36.065707;-94.1276125;12/3/2020;less than 100cm;8.84
+10000043;Danita Wayne  ;6007 Applegate Lane, Louisville, KY;43.9727945;-73.1023187;12/1/2020;Rosalia Garcia  ;110 Seaton Place Northwest, Washington, DC;38.9146701;-77.0126468;12/4/2020;less than 100cm;13.88
+10000044;Sharika Levier  ;560 Penstock Drive, Grass Valley, CA;38.867033;-76.979235;12/2/2020;Lon Schall  ;5385 Iris Street, Arvada, CO;39.794498;-105.106056;12/5/2020;less than 100cm;15.37
+10000045;Rosie Kamps  ;150 Carter Street, Manchester, CT;38.1343013;-85.6498512;12/3/2020;Rose Yancy  ;5628 West Tonopah Drive, Glendale, AZ;33.6710947;-112.1810955;12/6/2020;less than 100cm;17.69
+10000046;Nakita Araya  ;2721 Lindsay Avenue, Louisville, KY;39.213076;-121.077583;12/4/2020;Rene Seay  ;65 Bay Drive, Annapolis, MD;38.937493;-76.456387;12/7/2020;less than 100cm;7.85
+10000047;Theresia Lobdell  ;18 Densmore Drive, Essex, VT;41.76556;-72.473091;12/5/2020;Laurence Clegg  ;7401 North 61st Drive, Glendale, AZ;33.5450005;-112.191417;12/8/2020;less than 100cm;15.48
+10000048;Harry Ruther  ;637 Britannia Drive, Vallejo, CA;38.263793;-85.700243;12/6/2020;Robbin Strohm  ;2209 June Drive, Nashville, TN;36.16848;-86.695241;12/9/2020;less than 50cm;3.48
+10000049;Judson Merrit  ;5601 West Crocus Drive, Glendale, AZ;44.492953;-73.101883;12/7/2020;Vinnie Hodges  ;1840 Nobel Place, Louisville, KY;38.198892;-85.8090129;12/10/2020;less than 10cm;0.05
+10000050;Melina Kinnison  ;5403 Illinois Avenue, Nashville, TN;38.10477;-122.193849;12/8/2020;Irvin Quintana  ;2622 Martin Luther King Junior Boulevard, Fayetteville, AR;36.053922;-94.1973008;12/11/2020;less than 100cm;14.6
+10000051;Irma Pagan  ;8821 West Myrtle Avenue, Glendale, AZ;33.6152469;-112.179737;12/9/2020;Bradly Budd  ;4 Glen Circle, Glen Burnie, MD;39.157751;-76.606334;12/12/2020;less than 10cm;1.79
+10000052;Sha Ormsby  ;2203 7th Street Road, Louisville, KY;36.157077;-86.853827;11/27/2020;Phylicia Schnee  ;7529 West 72nd Avenue, Arvada, CO;39.8276128;-105.0799305;11/30/2020;less than 100cm;8.02
+10000053;Victoria Bomgardner  ;6463 Vrain Street, Arvada, CO;33.5404296;-112.2488391;11/27/2020;Claris Dudley  ;10996 Largo Drive, Savannah, GA;31.99178;-81.143668;11/30/2020;less than 100cm;8.56
+10000054;Sana Sluder  ;87 Horseshoe Drive, West Windsor, VT;38.218107;-85.779006;11/28/2020;Tiffani Theobald  ;2027 North Shannon Drive, Fayetteville, AR;36.0892622;-94.1733302;12/1/2020;less than 100cm;10.63
+10000055;Brendan Edlin  ;60 Desousa Drive, Manchester, CT;39.814056;-105.046913;11/29/2020;Thanh Townson  ;154 Boca Lagoon Drive, Panama City Beach, FL;30.171012;-85.775011;12/2/2020;less than 50cm;3.8
+10000056;Ofelia Koehn  ;4 Old Colony Way, Yarmouth, MA;43.4731793;-72.4967532;11/30/2020;Ella Tutino  ;3311 Wiley Post Loop, Anchorage, AK;61.186865;-149.946288;12/3/2020;less than 50cm;2.71
+10000057;Pearly Speziale  ;314 South 17th Street, Nashville, TN;41.7409259;-72.5619104;12/1/2020;Agnus Majka  ;5055 West 58th Avenue, Arvada, CO;39.8024171;-105.0505121;12/2/2020;less than 100cm;8.84
+10000058;Meta Albus  ;1649 Timberridge Court, Fayetteville, AR;41.697168;-70.189992;12/2/2020;Stephane Beck  ;3228 Chettenham Drive, Rancho Cordova, CA;38.577813;-121.301333;12/3/2020;less than 100cm;19.19
+10000059;Rueben Parras  ;5461 West Shades Valley Drive, Montgomery, AL;36.1719075;-86.740228;12/3/2020;Anjanette Kearley  ;1901 North Midwest Boulevard, Edmond, OK;35.67413;-97.390584;12/4/2020;less than 100cm;18.06
+10000060;Chantelle Stampley  ;629 Debbie Drive, Nashville, TN;36.084563;-94.206082;12/4/2020;Coralee Whitsitt  ;1536 North Main Street, Salinas, CA;36.7122208;-121.6522485;12/5/2020;less than 100cm;9.44
+10000061;Christeen Ziemba  ;22572 Toreador Drive, Salinas, CA;32.296422;-86.342803;12/5/2020;Bo Snipes  ;33 Linscott Road, Hingham, MA;42.2257391;-70.8828675;12/6/2020;less than 100cm;12.79
+10000062;Nanci Bently  ;3034 Mica Street, Fayetteville, AR;36.208114;-86.586212;12/6/2020;Amber Yount  ;1732 27th Avenue, Oakland, CA;37.783431;-122.228238;12/7/2020;less than 100cm;17.43
+10000063;Carola Petry  ;3729 East Mission Boulevard, Fayetteville, AR;36.602449;-121.699071;12/7/2020;Takisha Colmenero  ;22 Gallatin Street Northeast, Washington, DC;38.9526368;-77.0080993;12/8/2020;less than 100cm;16.05
+10000064;Joe Agular  ;5114 Greentree Drive, Nashville, TN;36.0807929;-94.2066449;12/8/2020;Versie Bess  ;8125 Glynnwood Drive, Montgomery, AL;32.341844;-86.14093;12/9/2020;less than 100cm;10.95
+10000065;Winford Skelley  ;3466 Southview Avenue, Montgomery, AL;36.0919353;-94.1065422;12/9/2020;Debbra Choi  ;2139 Glynnwood Drive, Savannah, GA;32.021538;-81.06861;12/10/2020;less than 100cm;19.7
+10000066;Shizuko Gaylord  ;1513 Cathy Street, Savannah, GA;36.0618539;-86.738508;11/29/2020;Aide Town  ;14 School Street, Medway, MA;42.141711;-71.395014;11/30/2020;less than 100cm;16.75
+10000067;Yetta Whitelow  ;600 West 19th Avenue, Anchorage, AK;32.341227;-86.2846859;11/30/2020;Sheldon Wheat  ;264 Crest Drive, Soldotna, AK;60.497608;-151.080848;12/1/2020;less than 100cm;12.97
+10000068;Elene Lebrun  ;1208 Elkader Court North, Nashville, TN;32.067416;-81.125331;12/1/2020;Rachelle Capps  ;307 Joel Street, Pooler, GA;32.123265;-81.24991;12/2/2020;less than 100cm;8.49
+10000069;Marya Magnusson  ;210 Green Road, Manchester, CT;61.203115;-149.894107;12/2/2020;Raisa Lemarr  ;188 River Road, Essex, VT;44.478846;-73.058294;12/3/2020;less than 100cm;6.73
+10000070;Chet Ebling  ;49548 Road 200, O'Neals, CA;36.080049;-86.601161;12/3/2020;Ed Aubert  ;1643 Oxford Street, Berkeley, CA;37.877894;-122.266436;12/4/2020;less than 100cm;10.77
+10000071;Harvey Mouzon  ;81 Seaton Place Northwest, Washington, DC;41.7909099;-72.5119513;12/4/2020;Sharie Carruth  ;5545 Saddlewood Lane, Brentwood, TN;36.026888;-86.7576629;12/5/2020;less than 100cm;18.71
+10000072;Britt Greenough  ;1267 Martin Street, Nashville, TN;37.153463;-119.648192;12/5/2020;Melodie Seibold  ;26466 Mockingbird Lane, Hayward, CA;37.6410262;-122.0864272;12/8/2020;less than 100cm;9.96
+10000073;Isaiah Saltz  ;7431 Candace Way, Louisville, KY;38.9149499;-77.0117026;11/29/2020;Adriana Dales  ;4840 Reservoir Road Northwest, Washington, DC;38.9158933;-77.0962873;11/30/2020;less than 10cm;0.56
+10000074;Dayna Wortman  ;1407 Walden Court, Crofton, MD;36.1404897;-86.7695179;11/30/2020;Eldridge Miguez  ;599 Cambridge Street, Cambridge, MA;42.3720518;-71.0861095;12/5/2020;less than 50cm;4.96
+10000075;Chassidy Knudsen  ;5906 Milton Avenue, Deale, MD;38.142768;-85.7717132;12/1/2020;Marquita Doran  ;584 Rural Hill Road, Nashville, TN;36.089291;-86.621854;12/3/2020;less than 100cm;10.92
+10000076;Harriett Morgenstern  ;74 Springfield Street, Agawam, MA;39.019306;-76.660653;12/2/2020;Fidela Jumper  ;10262 West 59th Avenue, Arvada, CO;39.803718;-105.111974;12/3/2020;less than 100cm;15.76
+10000077;Thanh Sia  ;2905 Stonebridge Court, Norman, OK;38.784451;-76.541255;12/3/2020;Ozie Brayton  ;945 South 5th Street, Louisville, KY;38.2402351;-85.7603112;12/5/2020;less than 100cm;16.5
+10000078;Daron Dan  ;20930 Todd Valley Road, Foresthill, CA;42.0894922;-72.6297558;12/4/2020;Dione Hamblen  ;2543 The Meadows, Montgomery, AL;32.3463001;-86.2185382;12/7/2020;less than 100cm;14.42
+10000079;Allan Schumacher  ;5928 West Mauna Loa Lane, Glendale, AZ;35.183319;-97.402105;12/5/2020;Marketta Slay  ;153 Atlantic Avenue, Salisbury, MA;42.8339101;-70.8157527;12/7/2020;less than 50cm;4.22
+10000080;Rickie Mejia  ;802 Madison Street Northwest, Washington, DC;38.989466;-120.883108;12/10/2020;Shonda Bordeaux  ;5722 8th Street Northwest, Washington, DC;38.959305;-77.024463;12/13/2020;less than 100cm;15.23
+10000081;Refugio Alvardo  ;2811 Battery Place Northwest, Washington, DC;33.6204899;-112.18702;12/11/2020;Toshia Bedgood  ;8700 Seaton Boulevard, Montgomery, AL;32.3378676;-86.1731595;12/14/2020;less than 100cm;18.27
+10000082;Vickie Brady  ;210 Lacross Lane, Westmore, VT;38.9582381;-77.0244287;12/12/2020;Erlene Lou  ;1004 Bellflower Street, Livermore, CA;37.710745;-121.732765;12/15/2020;less than 50cm;5.02
+10000083;Casandra Hackett  ;2010 Rising Hill Drive, Norman, OK;38.9256252;-77.0982646;12/13/2020;In Goldsberry  ;4738 Mallard Common, Fremont, CA;37.5666441;-122.0444344;12/9/2020;less than 100cm;10.56
+10000084;Caryl Antley  ;1745 T Street Southeast, Washington, DC;44.771005;-72.048664;12/14/2020;Jill Bobadilla  ;875 Latouche Street, Anchorage, AK;61.2132529;-149.8608243;12/15/2020;less than 50cm;4.38
+10000085;Jordon Dennard  ;6007 Applegate Lane, Louisville, KY;35.177281;-97.411869;11/27/2020;Arlinda Mansfield  ;4940 Fuller Road, Montgomery, AL;32.42936;-86.2168352;11/29/2020;less than 100cm;12.43
+10000086;Darleen Dyal  ;560 Penstock Drive, Grass Valley, CA;43.9727945;-73.1023187;11/27/2020;Reita Low  ;5754 Belleau Drive, Montgomery, AL;32.394398;-86.203138;11/28/2020;less than 50cm;3.11
+10000087;Kermit Norris  ;150 Carter Street, Manchester, CT;38.867033;-76.979235;11/28/2020;Lael Buchannon  ;1403 Lincoln Street, Savannah, GA;32.0613716;-81.0948225;11/29/2020;less than 100cm;19.46
+10000088;Loris Markell  ;2721 Lindsay Avenue, Louisville, KY;38.1343013;-85.6498512;11/29/2020;Catrina Householder  ;140 South Hill Avenue, Fayetteville, AR;36.0618737;-94.1692019;12/2/2020;less than 50cm;4.36
+10000089;Clementine Mohney  ;18 Densmore Drive, Essex, VT;39.213076;-121.077583;11/30/2020;Silva Jeffries  ;642 South 2nd Street, Louisville, KY;38.2472593;-85.7549195;12/1/2020;less than 100cm;14.08
+10000090;Oswaldo Frailey  ;637 Britannia Drive, Vallejo, CA;41.76556;-72.473091;12/1/2020;Camila Dixon  ;6473 Zephyr Street, Arvada, CO;39.814341;-105.085116;12/2/2020;less than 50cm;4.57
+10000091;Dianne Dahlen  ;5601 West Crocus Drive, Glendale, AZ;38.263793;-85.700243;12/10/2020;Herma Porche  ;4250 North Valley Lake Drive, Fayetteville, AR;36.1279064;-94.1218072;12/12/2020;less than 100cm;13.83
+10000092;Grisel Shiroma  ;5403 Illinois Avenue, Nashville, TN;44.492953;-73.101883;12/11/2020;Elfrieda Capshaw  ;565 North Lakeshore Drive, Panama City Beach, FL;30.246868;-85.918511;12/9/2020;less than 300cm;25.94
+10000093;Elin Wiener  ;8821 West Myrtle Avenue, Glendale, AZ;38.10477;-122.193849;12/12/2020;Margarita Stock  ;5514 West Wedington Drive, Fayetteville, AR;36.079411;-94.240031;12/15/2020;less than 50cm;2.33
+10000094;Mellissa Garcia  ;2203 7th Street Road, Louisville, KY;33.6152469;-112.179737;12/13/2020;Lupita Ryman  ;1909 Wainwright Avenue, Panama City, FL;30.183868;-85.722174;12/18/2020;less than 100cm;19.85
+10000095;Shenika Devenport  ;6463 Vrain Street, Arvada, CO;36.157077;-86.853827;12/14/2020;Alisia Ricco  ;4525 West Frier Drive, Glendale, AZ;33.5488732;-112.1565998;12/19/2020;less than 100cm;11.12
+10000096;Lashawn Baltz  ;87 Horseshoe Drive, West Windsor, VT;33.5404296;-112.2488391;11/27/2020;Sonja Frederic  ;201 West Montgomery Cross Road, Savannah, GA;31.9996137;-81.13121;12/2/2020;less than 100cm;15.26
+10000097;Marceline Olmos  ;60 Desousa Drive, Manchester, CT;38.218107;-85.779006;11/27/2020;Kelley Thacker  ;915 Heath Drive, Montgomery, AL;32.363883;-86.333247;12/2/2020;less than 100cm;9.55
+10000098;Quiana Runnels  ;4 Old Colony Way, Yarmouth, MA;39.814056;-105.046913;11/28/2020;Nikita Brautigam  ;95 Briarwood Drive, Manchester, CT;41.745751;-72.542544;12/3/2020;less than 100cm;21.7
+10000099;Jacki Haecker  ;314 South 17th Street, Nashville, TN;43.4731793;-72.4967532;11/29/2020;Ayesha Comeaux  ;69 Washington Street, Manchester, CT;41.7871249;-72.5208307;12/4/2020;less than 300cm;22.04
