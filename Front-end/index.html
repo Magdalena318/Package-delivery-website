@@ -59,10 +59,12 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		<br>
 		
 		<img id="package_logo" src="package_logo.png" alt="Package logo" >
-		<br><br><br>
+		<br><br>
 		<input id="send_button" type="button" value="Send a new package" />
 		<input id="lookup_button_open_form" type="button" value="Look up a package by number" />
 		<input id="lookup_button_all" type="button" value="Look up a package on map" />
+		<input id="lookup_route" type="button" value="Look up a route by vehicle" />
+		<input id="lookup_all_routes" type="button" value="Look up all routes" />
 
 	</div>
 	
@@ -78,6 +80,19 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		<input class="input" type="number" id="package_number" name="package_number" required><br><br>
 		
 		<input id="lookup_button" type="button" value="Look up a package" />
+	</form>
+	
+	<form id="vehicle_number_form">
+		<div class="header">
+			<h1> PACKAGE DELIVERY SERVICE</h1>
+		</div>
+	
+		<br>
+		
+		<label class="label" for="vehicle_number">Vehicle number:</label>
+		<input class="input" type="number" id="vehicle_number" name="vehicle_number" required><br><br>
+		
+		<input id="lookup_route_button" type="button" value="Look up a route" />
 	</form>
 	
 	<!-- First form: sender details -->

@@ -110,8 +110,8 @@ p{
 #pickup_refresh, #delivery_refresh{
 	grid-column:2;
 }
-
+ /* #sender_details, #receiver_details,*/
 /* Hiding forms */
-#package_number_form, #sender_details, #receiver_details, #package_details, #display_package_form, #package_submitted , #map_locations, #vehicle_number_form{
+#package_number_form, #package_details, #display_package_form, #package_submitted , #map_locations, #vehicle_number_form{
 	display: none;
 }
