@@ -27,8 +27,8 @@ namespace Back_endNew.Models
         public int id { get; set; }
         public double capacity { get; set; }
         public double occupied { get; set; }
-        public  List<Package> packages { get; set; }
-        List<Endpoint> route { get; set; }
+        List<Package> packages = new List<Package>();
+        public List<Endpoint> route { get; set; }
 
         public Vehicle(int _id, double _capacity, LatLng _depot) {
             id = _id;
@@ -72,9 +72,9 @@ namespace Back_endNew.Models
         //Returns the next endpoint
         static Endpoint closestPoint(List<Endpoint> points, Endpoint start)
         {
-            Endpoint next = new Endpoint();
+            Endpoint next = points[0];
 
-            foreach (var p in points) {
+            foreach (Endpoint p in points) {
                 if (distance(start.location, p.location) < distance(start.location, next.location))
                     next = p;
             }
@@ -84,6 +84,8 @@ namespace Back_endNew.Models
 
         public void ComputeRoute()
         {
+            route = new List<Endpoint>();
+
             //Setting the depot
             Endpoint depot_start = new Endpoint();
             depot_start.package_id = 0;
@@ -115,6 +117,8 @@ namespace Back_endNew.Models
                     cur.delivery = true;
                     tmp.Add(cur);
                 }
+
+                tmp.Remove(next);
             }
 
             //Setting the depot end

@@ -16,22 +16,20 @@ namespace Back_endNew.Controllers
         // GET: api/Vehicles
         public IHttpActionResult Get()
         {
-            Database.DistributePackages();
             return Ok(Database.GetVehicles());
         }
 
         // GET: api/Vehicles/5
         public IHttpActionResult Get(int id)
         {
-            Database.DistributePackages();
             Vehicle requested = Database.FindVehicle(id);
             if (requested == null)
             {
                 return NotFound();
             }
 
-            //requested.ComputeRoute();
-            return Ok(requested.packages);
+            requested.ComputeRoute();
+            return Ok(requested);
         }
 
         // POST: api/Vehicles

@@ -16,6 +16,15 @@ namespace Back_endNew.Models
 
         static Database()
         {
+            vehicles = new List<Vehicle>();
+            last_vehicle_id = 0;
+            Vehicle v1 = new Vehicle(NextVehicleId(), 1000, new LatLng(40.738555, -111.938347));
+            AddNewVehicle(v1);
+            Vehicle v2 = new Vehicle(NextVehicleId(), 1500, new LatLng(44.956586, -93.251868));
+            AddNewVehicle(v2);
+            Vehicle v3 = new Vehicle(NextVehicleId(), 3000, new LatLng(36.131984, -86.737220));
+            AddNewVehicle(v3);
+
             packages = new List<Package>();
             last_package_id = 10000100;
 
@@ -51,14 +60,7 @@ namespace Back_endNew.Models
                     AddNewPackage(p);
                 }
 
-                vehicles = new List<Vehicle>();
-                last_vehicle_id = 0;
-                Vehicle v1 = new Vehicle(NextVehicleId(), 1000, new LatLng(40.738555, -111.938347));
-                AddNewVehicle(v1);
-                Vehicle v2 = new Vehicle(NextVehicleId(), 1500, new LatLng(44.956586, -93.251868));
-                AddNewVehicle(v2);
-                Vehicle v3 = new Vehicle(NextVehicleId(), 3000, new LatLng(36.131984, -86.737220));
-                AddNewVehicle(v3);
+                DistributePackages();
             }
         }
 
@@ -86,6 +88,15 @@ namespace Back_endNew.Models
 
         public static void AddNewPackage(Package p)
         {
+            bool result = false;
+            List<Vehicle> tmp = vehicles.ConvertAll(x => new Vehicle(x));
+            while (result == false && tmp.Count > 0)
+            {
+                int cur_id = closestVehicle(tmp, p);
+                Vehicle candidate = FindVehicle(cur_id);
+                result = candidate.AddPackage(p);
+                tmp.Remove(tmp.Find(v => v.id == cur_id));
+            }
             packages.Add(p);
         }
 
@@ -126,14 +137,10 @@ namespace Back_endNew.Models
         }
 
         public static void DistributePackages() {
-            foreach (Vehicle v in vehicles) {
-                v.packages = new List<Package>();
-            }
-
             foreach (Package p in packages) {
                 bool result = false;
                 List<Vehicle> tmp = vehicles.ConvertAll(x => new Vehicle(x));
-                while (result == false) {
+                while (result == false && tmp.Count > 0) {
                     int cur_id = closestVehicle(tmp, p);
                     Vehicle candidate = FindVehicle(cur_id);
                     result = candidate.AddPackage(p);
