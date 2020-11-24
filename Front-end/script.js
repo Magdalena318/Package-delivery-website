@@ -74,6 +74,17 @@ window.onload = function load(){
 		depot_map.setView(e.latlng, 13);		
 	}
 	depot_map.on('click', onDepotMapClick);
+	
+	//Looking up a package on a map	
+	var route_map = L.map('route_map').setView([39.39870315600007, -99.41461918999994], 3);
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+		maxZoom: 18,
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1,
+		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
+	}).addTo(route_map);
+	var route_markers = L.layerGroup().addTo(route_map);
 
 	//Default color icon for markers
 	var default_icon = L.divIcon({
@@ -198,11 +209,15 @@ window.onload = function load(){
 		
 		document.getElementById("vehicle_number_form").style.display = "none";
 		document.getElementById("vehicle_details").style.display = "none";
+		document.getElementById("vehicle_submitted").style.display = "none";
+		document.getElementById("display_vehicle").style.display = "none";
+		document.getElementById("display_route").style.display = "none";
 	}
 	document.getElementById("lookup_homepage").addEventListener("click", ReturnHome);
 	document.getElementById("submitted_homepage").addEventListener("click", ReturnHome);
 	document.getElementById("all_lookup_homepage").addEventListener("click", ReturnHome);
 	document.getElementById("vehicle_submitted_homepage").addEventListener("click", ReturnHome);
+	document.getElementById("display_vehicle_homepage").addEventListener("click", ReturnHome);
 	
 	//Looking up a package by number
 	document.getElementById("lookup_button_open_form").onclick = function(){
@@ -414,14 +429,18 @@ window.onload = function load(){
 			return;
 		} else {	
 			//Sending GET request
-			var address = 'https://localhost:44306/api/Vehicles/'  + package_number.toString();
+			var address = 'https://localhost:44306/api/Vehicles/'  + vehicle_number.toString();
 			fetch(address, {
 				method: 'GET',
 			})
 				.then(response => response.json())
 				.then(data => {
+					console.log(data);
 					//Hide other forms
 					document.getElementById("vehicle_number_form").style.display = "none";
+					document.getElementById("display_vehicle").style.display = "grid";
+					document.getElementById("display_route").style.display = "block";
+					route_map.invalidateSize();
 					
 					display_route(data);
 				})

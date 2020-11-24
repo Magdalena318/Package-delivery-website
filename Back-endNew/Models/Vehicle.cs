@@ -9,6 +9,16 @@ namespace Back_endNew.Models
         public int package_id { get; set; }
         public bool delivery { get; set; }
         public LatLng location { get; set; }
+
+        public Endpoint() {
+            LatLng location = new LatLng();
+        }
+
+        public Endpoint(Endpoint e) {
+            package_id = e.package_id;
+            delivery = e.delivery;
+            location = e.location;
+        }
     }
 
     public class Vehicle
@@ -17,7 +27,7 @@ namespace Back_endNew.Models
         public int id { get; set; }
         public double capacity { get; set; }
         public double occupied { get; set; }
-        List<Package> packages { get; set; }
+        public  List<Package> packages { get; set; }
         List<Endpoint> route { get; set; }
 
         public Vehicle(int _id, double _capacity, LatLng _depot) {
@@ -29,20 +39,34 @@ namespace Back_endNew.Models
             route = new List<Endpoint>();
         }
 
+        public Vehicle(Vehicle v)
+        {
+            id = v.id;
+            capacity = v.capacity;
+            depot = v.depot;
+            occupied = v.occupied;
+            packages = v.packages.ConvertAll(x => new Package(x));
+            route = v.route.ConvertAll(x => new Endpoint(x));
+        }
+
         public bool AddPackage(Package p)
         {
             if (p.weight < capacity - occupied)
             {
-                packages.Append(p);
+                packages.Add(p);
                 occupied += p.weight;
                 return true;
             }
             return false;
         }
 
+        public List<Endpoint> getRoute() {
+            return route;
+        }
+
         static double distance(LatLng p, LatLng r)
         {
-            return Math.Sqrt(Math.Pow(p.lat - r.lat, 2) + Math.Pow(p.lat - r.lng, 2));
+            return Math.Sqrt(Math.Pow(p.lat - r.lat, 2) + Math.Pow(p.lng - r.lng, 2));
         }
 
         //Returns the next endpoint

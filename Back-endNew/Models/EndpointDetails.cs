@@ -11,6 +11,9 @@ namespace Back_endNew.Models
         public double lat { get; set; }
         public double lng { get; set; }
 
+        public LatLng() { 
+        
+        }
 
         public LatLng(double v1, double v2)
         {

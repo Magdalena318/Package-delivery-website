@@ -1,17 +1,3 @@
-<!-- Design and create a web application with REST services for presenting and storing multiple pickup and delivery orders.
-Please upload a complete solution (client and server SOURCE CODE ONLY) in a ZIP file.
-
-Requirements:
-Adding/deleting/editing(moving) points on the map
-Adding/editing data related to the points (like in your original forms)
-Storing data about the pickup and delivery orders on the server (you may use just an in-memory storage for demo purposes)
-Presenting overall data from the server on the map
-Presenting detailed information of the order selected on the map
-Matching addresses to locations and vice versa with geocoding and reverse geocoding services
-Notice:
-You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or other geocoding services. -->
-
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -248,20 +234,6 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 	</form>
 	
 	<!-- Adding vehicles -->
-	<form id="vehicle_number_form" class="hidden_form">
-		<div class="header">
-			<h1> PACKAGE DELIVERY SERVICE</h1>
-		</div>
-	
-		<br>
-		
-		<label class="label" for="vehicle_number">Vehicle number:</label>
-		<input class="input" type="number" id="vehicle_number" name="vehicle_number" required><br><br>
-		
-		<input id="lookup_route_button" type="button" value="Look up a route" />
-	</form>
-	
-	<!-- Vehicle details -->
 	<form id="vehicle_details" class="hidden_form">
 
 		<div class="subheader">
@@ -290,6 +262,51 @@ You might look into the Free Plan on https://www.geoapify.com/api-pricing/ or ot
 		</p>
 		<input class="homepage" id="vehicle_submitted_homepage" type="button" value="Go to the homepage">
 	</form>
+	
+	<!-- Look up vehicles -->
+	<form id="vehicle_number_form" class="hidden_form">
+		<div class="header">
+			<h1> PACKAGE DELIVERY SERVICE</h1>
+		</div>
+	
+		<br>
+		
+		<label class="label" for="vehicle_number">Vehicle number:</label>
+		<input class="input" type="number" id="vehicle_number" name="vehicle_number" required><br><br>
+		
+		<input id="lookup_route_button" type="button" value="Look up a route" />
+	</form>
+	
+	<!-- Display vehicles -->
+	<form id="display_vehicle" class="hidden_form">
+
+		<div class="subheader">
+		  <h2>Vehicle details</h2>
+		</div>
+
+		<br>
+		
+		<label class="label" for="display_vehicle_id">Vehicle number:</label>
+		<div id="display_vehicle_id"></div>
+		
+		<label class="label" for="display_capacity">Capacity (in kg):</label>
+		<div id="display_capacity"></div>
+		
+		<label class="label" for="display_occupied">Occupied (in kg):</label>
+		<div id="display_capacity"></div>
+		
+		<label class="label" for="display_depot">Depot location:</label>
+		<div id="display_depot"></div>
+		
+		<br>
+	</form>
+	
+	<div id="display_route" class="hidden_form">
+		<label class="label" for="route_map">Vehicle route:</label>
+		<div class = "map" id="route_map" required></div><br>
+		<input class="homepage" id="display_vehicle_homepage" type="button" value="Go to the homepage">
+	</div>
+	
 
 	</body>	
 </html>

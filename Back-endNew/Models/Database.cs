@@ -12,7 +12,6 @@ namespace Back_endNew.Models
         static List<Package> packages { get; set; }
         static List<Vehicle> vehicles { get; set; }
         static private int last_package_id { get; set; }
-
         static private int last_vehicle_id { get; set; }
 
         static Database()
@@ -34,20 +33,16 @@ namespace Back_endNew.Models
                     Package p = new Package();
                     p.id = Int32.Parse(values[0]);
                     //pickup
-                    p.pickup_details = new EndpointDetails();
+                    //p.pickup_details = new EndpointDetails();
                     p.pickup_details.name = values[1];
                     p.pickup_details.address = values[2];
                     p.pickup_details.latlng = new LatLng(Convert.ToDouble(values[3]), Convert.ToDouble(values[4]));
-                    //p.pickup_details.latlng.lat = Convert.ToDouble(values[3]);
-                    //p.pickup_details.latlng.lng = Convert.ToDouble(values[4]);
                     p.pickup_details.date = values[5];
                     //delivery
-                    p.delivery_details = new EndpointDetails();
+                    //p.delivery_details = new EndpointDetails();
                     p.delivery_details.name = values[6];
                     p.delivery_details.address = values[7];
                     p.delivery_details.latlng = new LatLng(Convert.ToDouble(values[8]), Convert.ToDouble(values[9]));
-                    //p.delivery_details.latlng.lat = Convert.ToDouble(values[8]);
-                    //p.delivery_details.latlng.lng = Convert.ToDouble(values[9]);
                     p.delivery_details.date = values[10];
                     //package details
                     p.size = values[11];
@@ -58,6 +53,12 @@ namespace Back_endNew.Models
 
                 vehicles = new List<Vehicle>();
                 last_vehicle_id = 0;
+                Vehicle v1 = new Vehicle(NextVehicleId(), 1000, new LatLng(40.738555, -111.938347));
+                AddNewVehicle(v1);
+                Vehicle v2 = new Vehicle(NextVehicleId(), 1500, new LatLng(44.956586, -93.251868));
+                AddNewVehicle(v2);
+                Vehicle v3 = new Vehicle(NextVehicleId(), 3000, new LatLng(36.131984, -86.737220));
+                AddNewVehicle(v3);
             }
         }
 
@@ -101,6 +102,44 @@ namespace Back_endNew.Models
         public static List<Vehicle> GetVehicles()
         {
             return vehicles;
+        }
+
+        static double distance(LatLng p, LatLng r)
+        {
+            return Math.Sqrt(Math.Pow(p.lat - r.lat, 2) + Math.Pow(p.lng - r.lng, 2));
+        }
+
+        static int closestVehicle(List<Vehicle> vls, Package start)
+        {
+            int vehicle_id = vls[0].id;
+            double cur_distance = distance(start.pickup_details.latlng, vls[0].depot);
+
+            foreach (var v in vls)
+            {
+                if (distance(start.pickup_details.latlng, v.depot) < cur_distance || distance(start.delivery_details.latlng, v.depot) < cur_distance) {
+                    vehicle_id = v.id;
+                    cur_distance = Math.Min(distance(start.pickup_details.latlng, v.depot), distance(start.delivery_details.latlng, v.depot));
+                }
+            }
+
+            return vehicle_id;
+        }
+
+        public static void DistributePackages() {
+            foreach (Vehicle v in vehicles) {
+                v.packages = new List<Package>();
+            }
+
+            foreach (Package p in packages) {
+                bool result = false;
+                List<Vehicle> tmp = vehicles.ConvertAll(x => new Vehicle(x));
+                while (result == false) {
+                    int cur_id = closestVehicle(tmp, p);
+                    Vehicle candidate = FindVehicle(cur_id);
+                    result = candidate.AddPackage(p);
+                    tmp.Remove(tmp.Find(v => v.id == cur_id));
+                }
+            }
         }
     }
 }
