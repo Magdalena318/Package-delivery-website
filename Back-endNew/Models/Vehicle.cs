@@ -27,6 +27,7 @@ namespace Back_endNew.Models
         public int id { get; set; }
         public double capacity { get; set; }
         public double occupied { get; set; }
+
         List<Package> packages = new List<Package>();
         public List<Endpoint> route { get; set; }
 

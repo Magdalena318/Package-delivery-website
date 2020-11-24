@@ -407,9 +407,6 @@ window.onload = function load(){
 					latlngs.push(cur_pickup_latlng);
 					latlngs.push(cur_delivery_latlng);
 					var polyline = L.polyline(latlngs, {color: cur_color}).addTo(lookup_map);
-					
-					//Tiles updating
-					lookup_map.invalidateSize();
 				}				
 				console.log(markers_layer.getLayers().length);
 			})
@@ -418,8 +415,49 @@ window.onload = function load(){
 /************************************************* LOOK UP ROUTES **********************************************************/
 	//Filling out "display_package_form" from the passed json
 	function display_route(data){
+		//Displaying the vehicle info
+		document.getElementById("display_vehicle_id").innerText = data.id;
+		document.getElementById("display_capacity").innerText = data.capacity;
+		document.getElementById("display_occupied").innerText = data.occupied;
+		document.getElementById("display_depot").innerText = "(" + data.depot.lat + ", " + data.depot.lng + ")";
+		
+		route_markers.clearLayers();
+		var endpoints = data.route;
+		var cur_color = getRandomColor();
+		
+		//Depot
+		var prev_latlng = L.latLng(endpoints[0].location.lat, endpoints[0].location.lng);
+		var route_marker = L.marker(prev_latlng, {icon: default_icon, title: "Depot"}).addTo(route_markers);
 
+		for(var i = 1;  i < data.route.length - 1; i++){	
+			var cur_latlng = L.latLng(endpoints[i].location.lat, endpoints[i].location.lng);
+			
+			//Markers title
+			if(endpoints[i].delivery == "false"){
+				var state = "pick up for ";				
+			} else {
+				var state = "delivery for ";				
+			}
+			route_marker = L.marker(cur_latlng, {icon: default_icon, title: state + endpoints[i].package_id}).addTo(route_markers);
+			
+			//Draw a line between markers
+			var latlngs = Array();
+			latlngs.push(cur_latlng);
+			latlngs.push(prev_latlng);
+			var polyline = L.polyline(latlngs, {color: cur_color}).addTo(route_map);
+			
+			prev_latlng = cur_latlng;
+		}
+		
+		//Depot
+		var depot_end = L.latLng(endpoints[data.route.length - 1].location.lat, endpoints[data.route.length - 1].location.lng);
+		var route_marker = L.marker(depot_end, {icon: default_icon, title: "Depot"}).addTo(route_markers);
+		var latlngs = Array();
+		latlngs.push(depot_end);
+		latlngs.push(prev_latlng);
+		var polyline = L.polyline(latlngs, {color: "#50c5e6"}).addTo(route_map);
 	}
+	
 	
 	//Look up route by number
 	document.getElementById("lookup_route_button").onclick = function(){
