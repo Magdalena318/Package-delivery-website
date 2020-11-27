@@ -565,8 +565,8 @@ window.onload = function load(){
 				console.log('Success:', data.toString());
 				document.getElementById("vehicle_details").style.display = "none";
 				document.getElementById("vehicle_submitted").style.display = "grid";
-			
-				document.getElementById("vehicle_success").textContent = document.getElementById("vehicle_success").textContent + data;
+				var successstring = "Vehicle has been submitted successfully! Vehicle number is ";
+				document.getElementById("vehicle_success").textContent = successstring + data;
 		})
 		.catch((error) => {
 		  console.error('Error:', error);
