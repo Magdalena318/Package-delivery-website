@@ -128,9 +128,13 @@ namespace Back_endNew.Models
 
             foreach (var v in vls)
             {
-                if (distance(start.pickup_details.latlng, v.depot) < cur_distance || distance(start.delivery_details.latlng, v.depot) < cur_distance) {
-                    vehicle_id = v.id;
-                    cur_distance = Math.Min(distance(start.pickup_details.latlng, v.depot), distance(start.delivery_details.latlng, v.depot));
+                if ((v.capacity - start.weight) >= 0)
+                {
+                    if (distance(start.pickup_details.latlng, v.depot) < cur_distance || distance(start.delivery_details.latlng, v.depot) < cur_distance)
+                    {
+                        vehicle_id = v.id;
+                        cur_distance = Math.Min(distance(start.pickup_details.latlng, v.depot), distance(start.delivery_details.latlng, v.depot));
+                    }
                 }
             }
 
