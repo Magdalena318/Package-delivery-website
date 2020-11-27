@@ -69,7 +69,7 @@ window.onload = function load(){
 	
 	function onDepotMapClick(e){
 		depot_marker.clearLayers();		
-		var marker = L.marker(e.latlng, {icon: default_icon}).addTo(depot_marker);
+		var marker = L.marker(e.latlng, {icon: depot_Icon}).addTo(depot_marker);
 		depot_location = e.latlng;
 		depot_map.setView(e.latlng, 13);		
 	}
@@ -85,6 +85,7 @@ window.onload = function load(){
 		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
 	}).addTo(route_map);
 	var route_markers = L.layerGroup().addTo(route_map);
+	var poly_markers = L.layerGroup().addTo(route_map);
 
 	//Default color icon for markers
 	var default_icon = L.divIcon({
@@ -95,6 +96,17 @@ window.onload = function load(){
 		html: `<span/>`
 	});
 	
+	var depot_Icon = L.icon({
+		iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-red.png',
+		shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+	
+		iconSize:     [38, 95], // size of the icon
+		shadowSize:   [50, 64], // size of the shadow
+		iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+		shadowAnchor: [4, 62],  // the same for the shadow
+		popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+	});
+
 	//Generate random color for a set of markers
 	function getRandomColor() {
 		var letters = '0123456789ABCDEF';
@@ -422,12 +434,13 @@ window.onload = function load(){
 		document.getElementById("display_depot").innerText = "(" + data.depot.lat + ", " + data.depot.lng + ")";
 		
 		route_markers.clearLayers();
+		poly_markers.clearLayers();
 		var endpoints = data.route;
 		var cur_color = getRandomColor();
 		
 		//Depot
 		var prev_latlng = L.latLng(endpoints[0].location.lat, endpoints[0].location.lng);
-		var route_marker = L.marker(prev_latlng, {icon: default_icon, title: "Depot"}).addTo(route_markers);
+		var route_marker = L.marker(prev_latlng, {icon: depot_Icon, title: "Depot"}).addTo(route_markers);
 
 		for(var i = 1;  i < data.route.length - 1; i++){	
 			var cur_latlng = L.latLng(endpoints[i].location.lat, endpoints[i].location.lng);
@@ -444,18 +457,18 @@ window.onload = function load(){
 			var latlngs = Array();
 			latlngs.push(cur_latlng);
 			latlngs.push(prev_latlng);
-			var polyline = L.polyline(latlngs, {color: cur_color}).addTo(route_map);
+			var polyline = L.polyline(latlngs, {color: cur_color}).addTo(poly_markers);
 			
 			prev_latlng = cur_latlng;
 		}
 		
 		//Depot
 		var depot_end = L.latLng(endpoints[data.route.length - 1].location.lat, endpoints[data.route.length - 1].location.lng);
-		var route_marker = L.marker(depot_end, {icon: default_icon, title: "Depot"}).addTo(route_markers);
+		var route_marker = L.marker(depot_end, {icon: depot_Icon, title: "Depot"}).addTo(route_markers);
 		var latlngs = Array();
 		latlngs.push(depot_end);
 		latlngs.push(prev_latlng);
-		var polyline = L.polyline(latlngs, {color: "#50c5e6"}).addTo(route_map);
+		var polyline = L.polyline(latlngs, {color: "#50c5e6"}).addTo(poly_markers);
 	}
 	
 	
@@ -540,7 +553,9 @@ window.onload = function load(){
 	
 	//Send the vehicle data to the server
 	document.getElementById("submit_vehicle").onclick = function(){
-		//Constructing JSON		
+		//Constructing JSON	
+		if(document.getElementById("capacity").value!="")	
+		{
 		const data = { 
 			"capacity": document.getElementById("capacity").value,
 			"lat": depot_location.lat,
@@ -561,15 +576,21 @@ window.onload = function load(){
 				console.log('Success:', data.toString());
 				document.getElementById("vehicle_details").style.display = "none";
 				document.getElementById("vehicle_submitted").style.display = "grid";
-			
-				document.getElementById("vehicle_success").textContent = document.getElementById("vehicle_success").textContent + data;
+				var successstring = "Vehicle has been submitted successfully! Vehicle number is ";
+				document.getElementById("vehicle_success").textContent = successstring + data;
 		})
 		.catch((error) => {
 		  console.error('Error:', error);
 		});
 	}
 	
+else
+{
+	alert("Enter capacity");
+}
 } 
+
+}
 
 
 
