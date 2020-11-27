@@ -69,7 +69,7 @@ window.onload = function load(){
 	
 	function onDepotMapClick(e){
 		depot_marker.clearLayers();		
-		var marker = L.marker(e.latlng, {icon: default_icon}).addTo(depot_marker);
+		var marker = L.marker(e.latlng, {icon: depot_Icon}).addTo(depot_marker);
 		depot_location = e.latlng;
 		depot_map.setView(e.latlng, 13);		
 	}
@@ -96,6 +96,17 @@ window.onload = function load(){
 		html: `<span/>`
 	});
 	
+	var depot_Icon = L.icon({
+		iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-red.png',
+		shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+	
+		iconSize:     [38, 95], // size of the icon
+		shadowSize:   [50, 64], // size of the shadow
+		iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+		shadowAnchor: [4, 62],  // the same for the shadow
+		popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+	});
+
 	//Generate random color for a set of markers
 	function getRandomColor() {
 		var letters = '0123456789ABCDEF';
@@ -429,7 +440,7 @@ window.onload = function load(){
 		
 		//Depot
 		var prev_latlng = L.latLng(endpoints[0].location.lat, endpoints[0].location.lng);
-		var route_marker = L.marker(prev_latlng, {icon: default_icon, title: "Depot"}).addTo(route_markers);
+		var route_marker = L.marker(prev_latlng, {icon: depot_Icon, title: "Depot"}).addTo(route_markers);
 
 		for(var i = 1;  i < data.route.length - 1; i++){	
 			var cur_latlng = L.latLng(endpoints[i].location.lat, endpoints[i].location.lng);
@@ -453,7 +464,7 @@ window.onload = function load(){
 		
 		//Depot
 		var depot_end = L.latLng(endpoints[data.route.length - 1].location.lat, endpoints[data.route.length - 1].location.lng);
-		var route_marker = L.marker(depot_end, {icon: default_icon, title: "Depot"}).addTo(route_markers);
+		var route_marker = L.marker(depot_end, {icon: depot_Icon, title: "Depot"}).addTo(route_markers);
 		var latlngs = Array();
 		latlngs.push(depot_end);
 		latlngs.push(prev_latlng);
