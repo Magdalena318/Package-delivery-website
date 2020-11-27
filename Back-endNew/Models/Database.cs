@@ -96,6 +96,7 @@ namespace Back_endNew.Models
                 Vehicle candidate = FindVehicle(cur_id);
                 result = candidate.AddPackage(p);
                 tmp.Remove(tmp.Find(v => v.id == cur_id));
+                result = true;
             }
             packages.Add(p);
         }
