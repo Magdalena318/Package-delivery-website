@@ -52,7 +52,7 @@ namespace Back_endNew.Models
 
         public bool AddPackage(Package p)
         {
-            if (p.weight < capacity - occupied)
+            if (p.weight <= capacity - occupied)
             {
                 packages.Add(p);
                 occupied += p.weight;

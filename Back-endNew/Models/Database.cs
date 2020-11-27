@@ -128,7 +128,7 @@ namespace Back_endNew.Models
 
             foreach (var v in vls)
             {
-                if ((v.capacity - start.weight) >= 0)
+                if (((v.capacity - v.occupied) - start.weight) >= 0)
                 {
                     if (distance(start.pickup_details.latlng, v.depot) < cur_distance || distance(start.delivery_details.latlng, v.depot) < cur_distance)
                     {
