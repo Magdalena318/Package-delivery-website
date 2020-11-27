@@ -85,6 +85,7 @@ window.onload = function load(){
 		accessToken: 'pk.eyJ1IjoibWFnZGFsZW5hMzE4IiwiYSI6ImNraGM5cGQ0bjAxMncycW0wbjNoNmdibjgifQ.3o366Xt1v3kTI8x_Q7vNJg'
 	}).addTo(route_map);
 	var route_markers = L.layerGroup().addTo(route_map);
+	var poly_markers = L.layerGroup().addTo(route_map);
 
 	//Default color icon for markers
 	var default_icon = L.divIcon({
@@ -422,6 +423,7 @@ window.onload = function load(){
 		document.getElementById("display_depot").innerText = "(" + data.depot.lat + ", " + data.depot.lng + ")";
 		
 		route_markers.clearLayers();
+		poly_markers.clearLayers();
 		var endpoints = data.route;
 		var cur_color = getRandomColor();
 		
@@ -444,7 +446,7 @@ window.onload = function load(){
 			var latlngs = Array();
 			latlngs.push(cur_latlng);
 			latlngs.push(prev_latlng);
-			var polyline = L.polyline(latlngs, {color: cur_color}).addTo(route_map);
+			var polyline = L.polyline(latlngs, {color: cur_color}).addTo(poly_markers);
 			
 			prev_latlng = cur_latlng;
 		}
@@ -455,7 +457,7 @@ window.onload = function load(){
 		var latlngs = Array();
 		latlngs.push(depot_end);
 		latlngs.push(prev_latlng);
-		var polyline = L.polyline(latlngs, {color: "#50c5e6"}).addTo(route_map);
+		var polyline = L.polyline(latlngs, {color: "#50c5e6"}).addTo(poly_markers);
 	}
 	
 	
@@ -540,7 +542,9 @@ window.onload = function load(){
 	
 	//Send the vehicle data to the server
 	document.getElementById("submit_vehicle").onclick = function(){
-		//Constructing JSON		
+		//Constructing JSON	
+		if(document.getElementById("capacity").value!="")	
+		{
 		const data = { 
 			"capacity": document.getElementById("capacity").value,
 			"lat": depot_location.lat,
@@ -569,7 +573,13 @@ window.onload = function load(){
 		});
 	}
 	
+else
+{
+	alert("Enter capacity");
+}
 } 
+
+}
 
 
 
